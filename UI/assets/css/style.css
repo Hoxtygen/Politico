@@ -394,6 +394,16 @@ table tr {
     border-radius: 0.25rem;
   }
 
+  .addNewParty      {
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 30px;
+      padding-bottom: 30px;
+  }
+
+  .addNewParty a    {
+      background: hsl(120, 65%, 44%);
+  }
 
 
 

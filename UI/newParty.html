@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Users dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+    <header class="default-header">
+        <div class="sticky-wrapper">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <a href="#">Politico</a>
+                    </div><!--logo closed-->
+                    <div class="image-user">
+                        <img src="./assets/img/doug.jpg" alt="user picture" height="50px" width="50px">
+                    </div>
+                </div><!-- header-content closed -->
+            </div> <!-- container closed -->   
+        </div><!-- sticky header closed --> 
+    </header>
+
+    <div id="wrapper">
+        <aside>
+            <div class="sidebar">
+            <section class="user-menu">
+                <ul class="navbar-nav">
+                    <li><a class="btn side" href="dashboard.html">Basic</a></li>
+                    <li><a class="btn side" href="parties.html">Political Parties</a></li>
+                    <!--<li><a class="btn side" href="#">Motivational</a></li>
+                    <li><a class="btn side" href="#">Inspirational</a></li> -->
+                </ul>
+            </section>
+            </div>
+        </aside>
+        <main>
+            <section id="main-content">
+                <div class="container-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 mx">
+                                <div class="text-center">
+                                    <h3>New Party Registration</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row jcc">
+                            <div class="col-6 mx">
+                                <div class="form-container">
+                                    <form action="" id="regForm" class="form mb-10">
+                                        <div class="single-input mb-10">
+                                            <input type="text" name="fullName" placeholder=" Party name e.g Alliance for Democracy" required onfocus="this.placeholder = ''" onblur="this.placeholder = 'Full Name'">
+                                        </div>
+                                        <div class="single-input mb-10">
+                                            <input type="text" name="acronym" placeholder=" Party acronym e.g ANPP" onfocus="this.placeholder=''" onblur="this.placeholder ='Party acronym'">
+                                        </div>
+                                        <div class="single-input mb-10">
+                                            <input type="tel" name="phoneNum" placeholder=" Office phone number e.g 09023456667" onblur="this.placeholder='Your telephone number'" onfocus="this.placeholder=''">
+                                        </div>
+                                        <div class="single-input mb-10">
+                                            <input type="text" name="address" placeholder="Office address e.g Adimula street, shomolu Lagos" onblur="this.placeholder='Your office address'" onfocus="this.placeholder=''">
+                                        </div>
+                                        <div class="d-flex jcc">
+                                            <button class="mt-10 aic btn-primary text-uppercase">Create</button>
+                                        </div>
+                                    </form>
+                                </div><!-- form-container closed-->
+                            </div>
+                        </div>
+                    </div><!-- container closed-->
+                </div><!--- container-wrapper closed -->
+            </section>
+        </main>
+        <footer>
+            <div class="footer-content">
+                <p>Copyright&COPY; Hoxtygen. All right reserved</p>
+            </div>
+        </footer>
+    </body>
+</html>
