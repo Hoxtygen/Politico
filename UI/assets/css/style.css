@@ -406,7 +406,31 @@ table tr {
   }
 
 
+  .form-check 		{
+    position: relative;
+    display: block;
+    padding: .5rem 1.25rem;
+    margin-bottom: .3rem;
+    /* border: 1px solid red ; */
+}
 
+.form-check-input 		{
+    position: absolute;
+    margin-top: 0.3rem;
+/* 	  margin-left: -1.25rem; */
+}
+
+
+.form-check-label 		{
+    margin-bottom: 0;
+    margin-left: 20px;;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  box-sizing: border-box;
+  padding: 0;
+}
 
 
 
