@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Users dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/test2.css" />
+</head>
+<body>
+    
+       
+    <header class="header">
+        <div class="logo">
+          <p>Politico</p>
+        </div><a class="nav-trigger text-replace" href="#0">Menu<span></span></a>
+      </header>
+      <main class="content">
+            <section id="main-content">
+                    <div class="container-wrapper">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 mx">
+                                    <div class="text-center header-container">
+                                        <h2>Registered Political Parties</h2>
+                                    </div>
+                                </div>
+                                <div class="col-12 mx">
+                                   <div class="addNewParty">
+                                        <a class="btn" href="newParty.html" style="color:black">Create new party</a>
+                                   </div>
+                                </div>
+                            </div>
+                            <div class="row jcc">
+                                <div class="col-10 mx">
+                                    <table id = "dataTable">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>Name</th>
+                                                <th>Acronym</th>
+                                                <th>Logo</th>
+                                                <th>Headquarter Address</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Peoples Democratic Party</td>
+                                                <td><Acronym>PDP</Acronym></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <a href="partyEdit.html">Edit</a>
+                                                    <button class="btn delete" type="submit">Delete</button>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>2</td>
+                                            <td>Labour Party</td>
+                                            <td><Acronym>LP</Acronym></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <a href="partyEdit.html">Edit</a>
+                                                <button class="btn delete" type="submit">Delete</button>
+                                            </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>3</td>
+                                            <td>Democratic Peoples Party</td>
+                                            <td><Acronym>DPP</Acronym></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <a href="partyEdit.html">Edit</a>
+                                                <button class="btn delete" type="submit">Delete</button>
+                                            </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>4</td>
+                                                <td>Progressive Peoples Alliance</td>
+                                                <td><Acronym>PPA</Acronym></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <a href="partyEdit.html">Edit</a>
+                                                    <button class="btn delete" type="submit">Delete</button>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>5</td>
+                                                <td>All Peoples Congress</td>
+                                                <td><Acronym>APC</Acronym></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <a href="partyEdit.html">Edit</a>
+                                                    <button class="btn delete" type="submit">Delete</button>
+                                                </td>
+                                            </tr>     
+                                        </tbody>                                   
+                                    </table>
+                                </div>
+                            </div>
+                        </div><!-- container closed-->
+                    </div><!--- container-wrapper closed -->
+                </section>
+      </main>
+      <nav class="main-nav-wrapper">
+        <ul class="nav">
+            <li><a class="side top-link" href="dashboard.html">General</a></li>
+            <li><a class="side" href="parties.html">Political Parties</a></li>
+            <li><a class="side" href="politicalOffice.html">Political Office</a></li>
+            <li><a href="contestants.html">Contestants</a></li>
+            <li><a href="electionResult.html">Results</a></li>
+            <li><a href="vote.html">Vote</a></li>
+        </ul>
+      </nav>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="./assets/js/main.js"></script>
+        </body>
+</html>
