@@ -4,7 +4,16 @@
   "description": "Politico enables citizens give their mandate to politicians running for different government offices while building trust in the process through transparency.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm -rf dist && mkdir dist",
+    "dev": "babel-watch server/server.js",
+    "build-babel": "babel -d ./dist ./server -s",
+    "build": "npm run clean && npm run build-babel",
+    "test": "mocha --require babel-register server/tests/*.js --exit",
+    "cover": "istanbul cover _mocha",
+    "start": "npm run build && node ./dist/server.js",
+    "lint": "./node_modules/.bin/eslint server --fix",
+     "createTables": "psql -U postgres -f store.sql",
+    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
