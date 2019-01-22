@@ -9,17 +9,18 @@ class partyController {
   }
 
   static getOneParty(req, res) {
-      const getParty = Parties.find(party => party.id === parseInt(req.params.id, 10));
-      if(getParty) {
-          res.status(200).json({
-              status: 200,
-              data: getParty,
-          })
-      }
-      return res.status(404).json({
-          status: 404,
-          error: 'Party does not exist',
-      })
+    const getParty = Parties.find(party => party.id === parseInt(req.params.id, 10));
+    if (getParty) {
+      res.status(200).json({
+        status: 200,
+        data: getParty,
+      });
+    } else {
+      res.status(404).json({
+        status: 404,
+        error: 'Party does not exist',
+      });
+    }
   }
 }
 

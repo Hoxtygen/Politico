@@ -17,4 +17,37 @@ describe('Parties', () => {
         });
     });
   });
+
+  describe('GET', () => {
+    it('should get a single political party', (done) => {
+      const id = 3;
+      chai.request(app)
+        .get(`/api/v1/parties/${id}`)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          done();
+        });
+    });
+
+    it('should not get a political party', (done) => {
+      const id = 300;
+      chai.request(app)
+        .get(`/api/v1/parties/${id}`)
+        .end((err, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+
+    it('should not get a political party', (done) => {
+      const id = 'man';
+      chai.request(app)
+        .get(`/api/v1/parties/${id}`)
+        .end((err, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+  });
 });
