@@ -5,113 +5,109 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Users dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" />
-    <script src="main.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/test2.css" />
 </head>
 <body>
-    <header class="default-header">
-        <div class="sticky-wrapper">
-            <div class="container">
-                <div class="header-content">
-                    <div class="logo">
-                        <a href="#">Politico</a>
-                    </div><!--logo closed-->
-                    <div class="image-user">
-                        <img src="./assets/img/doug.jpg" alt="user picture" height="50px" width="50px">
-                    </div>
-                </div><!-- header-content closed -->
-            </div> <!-- container closed -->   
-        </div><!-- sticky header closed --> 
-    </header>
-
-    <div id="wrapper">
-        <aside>
-            <div class="sidebar">
-            <section class="user-menu">
-                <ul class="navbar-nav">
-                    <li><a class="btn side" href="dashboard.html">Basic</a></li>
-                    <li><a class="btn side" href="parties.html">Political Parties</a></li>
-                    <li><a class="btn side" href="politicalOffice.html">Political Office</a></li>
-                    <li><a class="btn side" href="#" aria-haspopup="true">Election</a>
-                        <ul class="dropdown" aria-label="submenu">
-                            <li><a href="contestants.html">Contestants</a></li>
-                            <li><a href="electionResult.html">Results</a></li>
-                            <li><a href="vote.html">Vote</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </section>
-            </div>
-        </aside>
-        <main>
+    
+       
+    <header class="header">
+        <div class="logo">
+          <p>Politico</p>
+        </div><a class="nav-trigger text-replace" href="#0">Menu<span></span></a>
+      </header>
+      <main class="content">
             <section id="main-content">
-                <div class="container-wrapper">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 mx">
-                               <div class="addNewParty">
-                                    <a class="btn" href="newOffice.html" style="color:black">Create new office</a>
-                               </div>
+                    <div class="container-wrapper">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 mx">
+                                    <div class="user-profile text-center header-container">
+                                        <h2>Vacant Public Office</h2>
+                                    </div>
+                                </div>
+                                <div class="col-12 mx">
+                                   <div class="addNewParty">
+                                        <a class="btn" href="newOffice.html" style="color:black">Create new office</a>
+                                   </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row jcc">
-                            <div class="col-7 mx">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Office</th>
-                                            <th>Location</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
+                            <div class="row jcc">
+                                <div class="col-8 mx">
+                                    <table id = "dataTable">
+                                        <thead>
+                                            <tr>
+                                                <td>Id</td>
+                                                <th>Name</th>
+                                                <th>Type</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Governor</td>
+                                                <td>Alabama</td>
+                                                <td>
+                                                    <button class="btn contest" type="submit">Contest</button>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>2</td>
                                             <td>Governor</td>
-                                            <td>Alabama</td>
+                                            <td>New York</td>
                                             <td>
                                                 <button class="btn contest" type="submit">Contest</button>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                        <td>Governor</td>
-                                        <td>New York</td>
-                                        <td>
-                                            <button class="btn contest" type="submit">Contest</button>
-                                        </td>
-                                        </tr>
-                                        <tr>
-                                        <td>Mayor</td>
-                                        <td>New York</td>
-                                        <td>
-                                            <button class="btn contest" type="submit">Contest</button>
-                                        </td>
-                                        </tr>
-                                        <tr>
-                                            <td>President</td>
-                                            <td>United State of America</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>3</td>
+                                            <td>Mayor</td>
+                                            <td>New York</td>
                                             <td>
                                                 <button class="btn contest" type="submit">Contest</button>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Senator</td>
-                                            <td>Vermont</td>
-                                            <td>
-                                                <button class="btn contest" type="submit">Contest</button>
-                                            </td>
-                                        </tr>     
-                                    </tbody>                                   
-                                </table>
+                                            </tr>
+
+                                            <tr>
+                                                <td>4</td>
+                                                <td>President</td>
+                                                <td>United State of America</td>
+                                                <td>
+                                                    <button class="btn contest" type="submit">Contest</button>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>5</td>
+                                                <td>Senator</td>
+                                                <td>Vermont</td>
+                                                <td>
+                                                    <button class="btn contest" type="submit">Contest</button>
+                                                </td>
+                                            </tr>     
+                                        </tbody>                                   
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                    </div><!-- container closed-->
-                </div><!--- container-wrapper closed -->
-            </section>
-        </main>
-        <footer>
-            <div class="footer-content">
-                <p>Copyright&COPY; Hoxtygen. All right reserved</p>
-            </div>
-        </footer>
-    </body>
+                        </div><!-- container closed-->
+                    </div><!--- container-wrapper closed -->
+                </section>
+      </main>
+      <nav class="main-nav-wrapper">
+        <ul class="nav">
+            <li><a class="side top-link" href="dashboard.html">General</a></li>
+            <li><a class="side" href="parties.html">Political Parties</a></li>
+            <li><a class="side" href="politicalOffice.html">Political Office</a></li>
+            <li><a href="contestants.html">Contestants</a></li>
+            <li><a href="electionResult.html">Results</a></li>
+            <li><a href="vote.html">Vote</a></li>
+        </ul>
+      </nav>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="./assets/js/main.js"></script>
+        </body>
 </html>
