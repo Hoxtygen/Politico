@@ -19,6 +19,10 @@ a {
   color: #340c66;
 }
 
+ol, ul    {
+  list-style-type: none;
+}
+
 .overflow-hidden {
   overflow: hidden;
 }
@@ -450,7 +454,6 @@ a {
 .header-container {
     padding-top: 30px;
     padding-bottom: 30px;
-    border: 1px solid red;
     margin-bottom: 20px;
 }
 
@@ -479,7 +482,7 @@ table   {
   border-collapse: collapse;
   background: mediumaquamarine;
   border: 1px solid maroon;
-  text-align: center;
+  text-align: left;
   width: 100%;
 } 
 
