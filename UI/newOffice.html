@@ -5,80 +5,66 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Users dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" />
-    <script src="main.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/test2.css" />
 </head>
 <body>
-    <header class="default-header">
-        <div class="sticky-wrapper">
-            <div class="container">
-                <div class="header-content">
-                    <div class="logo">
-                        <a href="#">Politico</a>
-                    </div><!--logo closed-->
-                    <div class="image-user">
-                        <img src="./assets/img/doug.jpg" alt="user picture" height="50px" width="50px">
-                    </div>
-                </div><!-- header-content closed -->
-            </div> <!-- container closed -->   
-        </div><!-- sticky header closed --> 
-    </header>
-
-    <div id="wrapper">
-        <aside>
-            <div class="sidebar">
-            <section class="user-menu">
-                <ul class="navbar-nav">
-                    <li><a class="btn side" href="dashboard.html">Basic</a></li>
-                    <li><a class="btn side" href="parties.html">Political Parties</a></li>
-                    <li><a class="btn side" href="politicalOffice.html">Political Office</a></li>
-                    <li><a class="btn side" href="#" aria-haspopup="true">Election</a>
-                        <ul class="dropdown" aria-label="submenu">
-                            <li><a href="contestants.html">Contestants</a></li>
-                            <li><a href="electionResult.html">Results</a></li>
-                            <li><a href="vote.html">Vote</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </section>
-            </div>
-        </aside>
-        <main>
+    
+       
+    <header class="header">
+        <div class="logo">
+          <p>Politico</p>
+        </div><a class="nav-trigger text-replace" href="#0">Menu<span></span></a>
+      </header>
+      <main class="content">
             <section id="main-content">
-                <div class="container-wrapper">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 mx">
-                                <div class="text-center">
-                                    <h3>New Office</h3>
+                    <div class="container-wrapper">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 mx">
+                                    <div class="text-center header-container">
+                                        <h3>New Office Registration</h3>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row jcc">
-                            <div class="col-6 mx">
-                                <div class="form-container">
-                                    <form action="" id="regForm" class="form mb-10">
-                                        <div class="single-input mb-10">
-                                            <input type="text" name="offName" placeholder=" Office name e.g President" required onfocus="this.placeholder = ''" onblur="this.placeholder = 'Office name'">
-                                        </div>
-                                        <div class="single-input mb-10">
-                                            <input type="text" name="offLocation" placeholder=" Election location e.g New Hampshire" onfocus="this.placeholder=''" onblur="this.placeholder ='Election location'">
-                                        </div>
-                                        <div class="d-flex jcc">
-                                            <button class="mt-10 aic btn-primary text-uppercase">Create</button>
-                                        </div>
-                                    </form>
-                                </div><!-- form-container closed-->
+                            <div class="row jcc">
+                                <div class="col-6 mx">
+                                    <div class="form-container">
+                                        <form action="" id="regForm" class="form mb-10">
+                                            <div class="single-input mb-10">
+                                                <input type="text" name="offName" placeholder=" Office name e.g President" required onfocus="this.placeholder = ''" onblur="this.placeholder = 'Office name'">
+                                            </div>
+                                            <div class="single-input mb-10">
+                                                <select name="officeType" id="officeType">
+                                                    <option value="" disabled >Select office type</option>
+                                                    <option value="federal">Federal</option>
+                                                    <option value="legislative">Legislative</option>
+                                                    <option value="state">State</option>
+                                                    <option value="local">Local</option>
+                                                </select>
+                                            </div>
+                                            <div class="d-flex jcc">
+                                                <button class="mt-10 aic btn-primary text-uppercase">Create</button>
+                                            </div>
+                                        </form>
+                                    </div><!-- form-container closed-->
+                                </div>
                             </div>
-                        </div>
-                    </div><!-- container closed-->
-                </div><!--- container-wrapper closed -->
-            </section>
-        </main>
-        <footer>
-            <div class="footer-content">
-                <p>Copyright&COPY; Hoxtygen. All right reserved</p>
-            </div>
-        </footer>
-    </body>
+                        </div><!-- container closed-->
+                    </div><!--- container-wrapper closed -->
+                </section>
+      </main>
+      <nav class="main-nav-wrapper">
+        <ul class="nav">
+            <li><a class="side top-link" href="dashboard.html">General</a></li>
+            <li><a class="side" href="parties.html">Political Parties</a></li>
+            <li><a class="side" href="politicalOffice.html">Political Office</a></li>
+            <li><a href="contestants.html">Contestants</a></li>
+            <li><a href="electionResult.html">Results</a></li>
+            <li><a href="vote.html">Vote</a></li>
+        </ul>
+      </nav>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="./assets/js/main.js"></script>
+        </body>
 </html>
