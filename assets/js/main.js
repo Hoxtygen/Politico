@@ -50,7 +50,7 @@
 
 
 
-  var headertext = [],
+  const headertext = [],
 headers = document.querySelectorAll("#dataTable th"),
 tablerows = document.querySelectorAll("#dataTable th"),
 tablebody = document.querySelector("#dataTable tbody");
