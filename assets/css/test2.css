@@ -1,5 +1,6 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:400,300);
-@import url(https://fonts.googleapis.com/css?family=Permanent+Marker);
+@import url('https://fonts.googleapis.com/css?family=Lato:400,300');
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
+@import url('https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,500,600,700');
 *, *::after, *::before {
   box-sizing: border-box;
   margin: 0;
@@ -746,3 +747,6 @@ input[type="checkbox"] {
   color: #fff;
   font-size: 0.9rem;
 }
+
+
+

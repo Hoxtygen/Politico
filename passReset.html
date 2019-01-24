@@ -5,26 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Password Reset</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" />
 </head>
 <body>
-    <header class="default-header">
-        <div class="sticky-wrapper" style="background: transparent">
-            <div class="container">
-                <div class="header-content aic jcb d-flex">
-                    <div class="logo">
-                        <a href="index.html" rel="noopener noreferrer">Politico</a>
-                    </div>
-                    <nav class="d-flex aic">
-                        <ul class="nav-menu">
-                            <li><a href="signup.html" rel="noopener noreferrer">Signup</a></li>
+        <header class="default-header">
+            <div class="sticky-header">
+                <div class="container">
+                    <nav class="navbar">
+                        <label for="check-toggle" class="toggleNavbar" id = "toggleNavbar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <a href="index.html" class="dlogo">Politico</a>
+                        <input type="checkbox" id="check-toggle"></input>
+                        <ul class="navbar-nav" id = "mainNav">
+                            <li><a class="nav-item" href="signup.html">Signup</a></li>
                         </ul>
-                    </nav>
-                    
+                </nav>
                 </div>
             </div>
-        </div>
-    </header>
+        </header>
 
     <div id = "form-wrapper">
         <section class="form-register">
@@ -33,7 +33,7 @@
                 <div class="row fullscreen jcc aic h100">
                     <div class="col-6 mx tc">
                         <div class="smug mb-10">
-                            <h4>Reset your password</h4>
+                            <h2>Reset your password</h2>
                         </div>
                         <div class="form-container">
                             <form action="" id="regForm" class="form mb-10">
