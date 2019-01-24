@@ -10,6 +10,7 @@ body 	{
 	background: #2A587F;
     font-family: "EB Garamond";
     color: #fff;
+    font-size: 1.2rem;
 }
 
 a   {
@@ -173,7 +174,10 @@ ul, ol  {
     font-size: 22px;
     margin-top: 10px;
     margin-left: 20px;
-    font-family: "EB Garamond";
+    font-family: "EB Garamond", serif;
+    text-transform: uppercase;
+    line-height: 50px;
+    font-weight: 600;
   }
 
   .navbar-nav li {
@@ -282,7 +286,7 @@ ul, ol  {
 /* Banner Area */
 .banner-area    {
     min-height: 100vh;
-    background-image: url('../img/background5.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../img/background5.jpg');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -308,8 +312,11 @@ ul, ol  {
 .banner-content h1      {
     color: #fff;
     font-weight: 800;
-    font-size: 50px;
+    font-size: 3rem;
     padding: 15px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    text-align: center;
 }
 
 
