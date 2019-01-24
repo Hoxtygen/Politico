@@ -319,6 +319,10 @@ ul, ol  {
     text-align: center;
 }
 
+.banner-content p   {
+    font-size: 1.5rem;
+}
+
 
  @media (min-width: 576px) {
     .container {
