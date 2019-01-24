@@ -50,4 +50,27 @@ describe('Parties', () => {
         });
     });
   });
+
+  describe('Delete a party', () => {
+    it('should delete a party', (done) => {
+      const id = 4;
+      chai.request(app)
+        .delete(`/api/v1/parties/${id}`)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          done();
+        });
+    });
+
+    it('should not delete a party', (done) => {
+      const id = 300;
+      chai.request(app)
+        .delete(`/api/v1/parties/${id}`)
+        .end((err, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+  });
 });
