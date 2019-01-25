@@ -43,6 +43,30 @@ class partyController {
       error: 'Party not found',
     });
   }
+
+  static addNewParty(req, res) {
+    const {
+      name, Acronym, hqAddress, logoUrl,
+    } = req.body;
+    if (!name || !Acronym || !hqAddress || !logoUrl) {
+      return res.status(400).json({
+        message: 'Missing fields not allowed',
+      });
+    }
+
+    const newParty = {
+      id: Parties.length + 1,
+      name,
+      Acronym,
+      hqAddress,
+      logoUrl,
+    };
+    Parties.push(newParty);
+    return res.status(201).json({
+      status: 201,
+      data: newParty,
+    });
+  }
 }
 
 export default partyController;
