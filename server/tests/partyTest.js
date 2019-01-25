@@ -98,4 +98,22 @@ describe('Parties', () => {
         });
     });
   });
+
+  describe('PUT', () => {
+    it('should edit a party', (done) => {
+      const id = 1;
+      chai.request(app)
+        .patch(`/api/v1/parties/${id}`)
+        .send({
+          name: 'National People Party',
+          Acronym: 'NPN',
+          hqAddress: 'Dabo Shopping Mall, 2nd Floor, Plot 73 Ladoke Akintola Boulevard, Garki, Abuja',
+          logoUrl: 'http://i38.photobucket.com/albums/e143/hoxtygen/Politico/LP_zpstzetsgna.jpg',
+        })
+        .end((err, res) => {
+          res.should.have.status(200);
+          done();
+        });
+    });
+  });
 });
