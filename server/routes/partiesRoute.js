@@ -5,6 +5,6 @@ const partiesRouter = Router();
 partiesRouter.get('/parties', partiesController.getAllParties);
 partiesRouter.get('/parties/:id', partiesController.getOneParty);
 partiesRouter.delete('/parties/:id', partiesController.deleteParty);
-partiesRouter.post('/parties', partiesController.addNew);
+partiesRouter.post('/parties', partiesController.addNewParty);
 
 export default partiesRouter;

@@ -44,8 +44,8 @@ class partyController {
     });
   }
 
-  static addNew(req, res) {
-    const { 
+  static addNewParty(req, res) {
+    const {
       name, Acronym, hqAddress, logoUrl,
     } = req.body;
     if (!name || !Acronym || !hqAddress || !logoUrl) {
@@ -62,7 +62,6 @@ class partyController {
       logoUrl,
     };
     Parties.push(newParty);
-    console.log();
     return res.status(201).json({
       status: 201,
       data: newParty,
