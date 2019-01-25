@@ -26,9 +26,9 @@ class partyController {
   static deleteParty(req, res) {
     const id = parseInt(req.params.id, 10);
     let deleted;
-    Parties.map((party, index) => {
+    Parties.filter((party, index) => {
       if (party.id === id) {
-        Parties.slice(index, 1);
+        Parties.splice(index, 1);
         deleted = party;
       }
     });
