@@ -73,4 +73,29 @@ describe('Parties', () => {
         });
     });
   });
+
+  describe('ADD new party', () => {
+    it('should add a new political party', (done) => {
+      const newParty = {
+        id: 9,
+        name: 'All Nigerian Peoples Party',
+        Acronym: 'ANPP',
+        hqAddress: '40 Blantyre Street, Wuse II; Abuja, Nigeria',
+        logoUrl: 'http://i38.photobucket.com/albums/e143/hoxtygen/Politico/anpp_zps2e7rdmhy.png',
+      };
+      chai.request(app)
+        .post('/api/v1/parties')
+        .send(newParty)
+        .end((err, res) => {
+          res.should.have.status(201);
+          res.body.should.be.a('object');
+          res.body.data.should.have.a.property('id');
+          res.body.data.should.have.a.property('name');
+          res.body.data.should.have.a.property('Acronym');
+          res.body.data.should.have.a.property('hqAddress');
+          res.body.data.should.have.a.property('logoUrl');
+          done();
+        });
+    });
+  });
 });
