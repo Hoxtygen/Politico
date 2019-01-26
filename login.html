@@ -17,7 +17,7 @@
                 	<a href="index.html" class="dlogo">Politico</a>
                 	<input type="checkbox" id="check-toggle"></input>
                 	<ul class="navbar-nav" id = "mainNav">
-	                    <li><a class="nav-item" href="signup.html">Signup</a></li>
+	                    <li><a class="nav-item" href="signup.html">Register</a></li>
                 	</ul>
             </nav>
 			</div>
@@ -33,16 +33,16 @@
                             <h3>Welcome Back</h3>
                         </div>
                         <div class="form-container">
-                            <form action="" id="regForm" class="form mb-10">
+                            <form action="" id="regForm" class="form mb-10" method="GET">
                                 <div class="single-input mb-10">
-                                    <input type="email" name="email" placeholder="Email Address" onfocus="this.placeholder=''" onblur="this.placeholder ='Email Address'">
+                                    <input type="email" name="email" id = "email" placeholder="Email Address" onfocus="this.placeholder=''" onblur="this.placeholder ='Email Address'">
                                 </div>
                                 <div class="single-input mb-10">
-                                    <input type="password" name="password" placeholder="Your Password" onblur="this.placeholder='Your Password'" onfocus="this.placeholder=''">
+                                    <input type="password" name="password" id = "password" placeholder="Your Password" onblur="this.placeholder='Your Password'" onfocus="this.placeholder=''">
                                 </div>
                                 <a href="passReset.html">Forgot password?</a>
                                 <div class="d-flex jcc">
-                                    <button class="mt-10 aic btn btn-primary text-uppercase">Login</button>
+                                    <input type="button" class="mt-10 aic btn btn-primary text-uppercase" onclick=logUser() value="Login">
                                 </div>
                             </form>
                             <p>Don't have an account?</p>
@@ -52,6 +52,8 @@
                 </div>
             </div>
     	</section>
-	</main>
+    </main>
+    
+    <script src="assets/js/login.js"></script>
 </body>
 </html>
