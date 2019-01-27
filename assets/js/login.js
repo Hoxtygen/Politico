@@ -30,7 +30,7 @@ function logUser() {
             window.location = 'dashboard.html';
             return;
         } else if (username === Users[i].username && password === Users[i].password && Users[i].isAdmin === false) {
-            window.location = 'contestants.html';
+            window.location = 'Udashboard.html';
             return
         }
     }
