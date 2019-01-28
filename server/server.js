@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import partiesRouter from './routes/partiesRoute';
+import officeRouter from './routes/officeRoute';
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/v1', partiesRouter);
+app.use('/api/v1', officeRouter);
 
 //  load up the server
 app.listen(port, () => console.log(`Server running on port: ${port}`));
