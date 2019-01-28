@@ -23,7 +23,26 @@ class OfficeController {
     });
   }
 
- 
+  static addNewOffice(req, res) {
+    const { type, name } = req.body;
+    if (!type || !name) {
+      res.status(400).json({
+        status: 404,
+        error: 'Missing fields not allowed',
+      });
+    }
+
+    const newOffice = {
+      id: politicalOffice.length + 1,
+      name,
+      type,
+    };
+    politicalOffice.push(newOffice);
+    return res.status(201).json({
+      status: 201,
+      data: newOffice,
+    });
+  }
 }
 
 
