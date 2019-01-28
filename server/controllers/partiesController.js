@@ -67,6 +67,49 @@ class partyController {
       data: newParty,
     });
   }
+
+  static editParty(req, res) {
+    const {
+      name, Acronym, hqAddress, logoUrl,
+    } = req.body;
+
+    if (!name || !Acronym || !hqAddress || !logoUrl) {
+      return res.status(400).json({
+        message: 'Missing fields not allowed',
+      });
+    }
+
+    const partyId = parseInt(req.params.id, 10);
+    let partyToEdit;
+    let partyToEditIndex;
+    Parties.filter((party, index) => {
+      if (party.id === partyId) {
+        partyToEdit = party;
+        partyToEditIndex = index;
+      }
+    });
+
+    if (!partyToEdit) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Party not found',
+      });
+    }
+
+    const updatedParty = {
+      id: partyToEdit.id,
+      name: req.body.name || partyToEdit.name,
+      Acronym: req.body.Acronym || partyToEdit.Acronym,
+      hqAddress: req.body.hqAddress || partyToEdit.hqAddress,
+      logoUrl: req.body.logoUrl || partyToEdit.logoUrl,
+    };
+
+    Parties.splice(partyToEditIndex, 1, updatedParty);
+    return res.status(200).json({
+      status: 200,
+      data: updatedParty,
+    });
+  }
 }
 
 export default partyController;
