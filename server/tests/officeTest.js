@@ -31,4 +31,25 @@ describe('Political Office', () => {
         });
     });
   });
+
+  describe('Create a political office', () => {
+    it('should create a political office', (done) => {
+      const newOffice = {
+        id: 23,
+        name: 'Alaga Council',
+        type: 'Local',
+      };
+      chai.request(app)
+        .post('/api/v1/offices')
+        .send(newOffice)
+        .end((err, res) => {
+          res.should.have.status(201);
+          res.body.should.be.a('object');
+          res.body.data.should.have.a.property('id');
+          res.body.data.should.have.a.property('name');
+          res.body.data.should.have.a.property('type');
+          done();
+        });
+    });
+  });
 });
