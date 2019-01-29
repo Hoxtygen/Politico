@@ -19,7 +19,7 @@ class UserController {
         if (!user.rows[0]) {
           return res.status(400).json({
             status: 400,
-            error: 'Invalid credentials supplied',
+            error: 'Invalid email supplied',
           });
         }
 
