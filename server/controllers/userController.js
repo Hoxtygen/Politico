@@ -1,3 +1,4 @@
+import encrypt from './encrypt';
 import dbConfig from '../database/dbConfig';
 
 class UserController {
@@ -11,9 +12,45 @@ class UserController {
       });
   }
 
+  static login(req, res) {
+    const { email, password } = req.body;
+    dbConfig.query('SELECT * FROM politico_andela.users WHERE email = $1', [email])
+      .then((user) => {
+        if (!user.rows[0]) {
+          return res.status(400).json({
+            status: 400,
+            error: 'Invalid email supplied',
+          });
+        }
+
+        if (password === '') {
+          return res.status(400).json({
+            status: 400,
+            error: 'Please supply your password',
+          });
+        }
+
+        if (!encrypt.compare(user.rows[0].password, password)) {
+          return res.status(400).json({
+            status: 400,
+            error: 'Invalid username or password',
+          });
+        }
+        const token = encrypt.createToken(user.rows[0].email);
+        return res.status(200).json({
+          token,
+        });
+      })
+      .catch((err) => {
+        res.status(400).json({
+          status: 400,
+          error: err.message,
+        });
+      });
+  }
+
 
   static addNewUser(req, res) {
-    console.log(req.body);
     req.checkBody('firstname', 'First name  is required').notEmpty().trim();
     req.checkBody('lastname', 'Last name is required').notEmpty().trim();
     req.checkBody('othername', 'Other name is required').notEmpty().trim();
@@ -29,7 +66,6 @@ class UserController {
 
     const errors = req.validationErrors();
     if (errors) {
-      console.log(errors);
       res.status(400).json({
         status: 400,
         errors,
@@ -38,6 +74,7 @@ class UserController {
     let {
       firstname, lastname, othername, email, phonenumber, passporturl, password,
     } = req.body;
+    password = encrypt.encryptPwd(password);
     const newUser = {
       firstname,
       lastname,
