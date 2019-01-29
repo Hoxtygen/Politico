@@ -13,9 +13,6 @@ class UserController {
   }
 
   static login(req, res) {
-    req.checkBody('email', 'Email field is required').notEmpty().trim();
-    req.checkBody('email', 'Invalid email address').isEmail();
-    req.checkBody('password', 'Password is required').notEmpty();
     const { email, password } = req.body;
     dbConfig.query('SELECT * FROM politico_andela.users WHERE email = $1', [email])
       .then((user) => {
@@ -25,6 +22,14 @@ class UserController {
             error: 'Invalid credentials supplied',
           });
         }
+
+        if (password === '') {
+          return res.status(400).json({
+            status: 400,
+            error: 'Please supply your password',
+          });
+        }
+
         if (!encrypt.compare(user.rows[0].password, password)) {
           return res.status(400).json({
             status: 400,
@@ -32,7 +37,7 @@ class UserController {
           });
         }
         const token = encrypt.createToken(user.rows[0].email);
-        res.status(200).json({
+        return res.status(200).json({
           token,
         });
       })
