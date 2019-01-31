@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import Validator from 'express-validator';
 import partiesRouter from './routes/partiesRoute';
-import officeRouter from './routes/officeRoute';
+import officesRouter from './routes/officesRoute';
 import usersRouter from './routes/userRoute';
 import votesRouter from './routes/votesRoute';
 
@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/v1', partiesRouter);
-app.use('/api/v1', officeRouter);
+app.use('/api/v1', officesRouter);
 app.use('/api/v1/auth', usersRouter);
 app.use('/api/v1', votesRouter);
 

@@ -1,16 +1,13 @@
 import dbConfig from '../database/dbConfig';
+import validations from '../helper/validateLogin';
 
 class VoteController {
   static addNewVote(req, res) {
-    req.checkBody('office', 'Office Id  is required').notEmpty().trim().isNumeric();
-    req.checkBody('candidate', 'candidate Id is required').notEmpty().trim().isNumeric();
-    req.checkBody('voter', 'Voter Id is required').notEmpty().trim().isNumeric();
-
-    const errors = req.validationErrors();
+    const errors = validations.validateVotes(req.body);
     if (errors) {
       res.status(400).json({
         status: 400,
-        errors,
+        error: errors.error.details[0].message,
       });
     }
 

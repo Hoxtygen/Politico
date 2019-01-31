@@ -1,7 +1,8 @@
 import dbConfig from '../database/dbConfig';
+import validations from '../helper/validateLogin';
 import politicalOffice from '../database/officeData';
 
-class OfficeController {
+class OfficesController {
   static getAllOffices(req, res) {
     dbConfig.query('SELECT * FROM politico_andela.offices')
       .then(offices => res.status(200).json({
@@ -40,16 +41,14 @@ class OfficeController {
   }
 
   static addNewOffice(req, res) {
-    req.checkBody('name', 'Office name  is required').notEmpty().trim();
-    req.checkBody('type', 'Office type is required').notEmpty().trim();
-    const { type, name } = req.body;
-    const errors = req.validationErrors();
-    if (errors) {
-      res.status(400).json({
+    const errors = validations.validateNewOffice(req.body);
+    if (errors.error) {
+      return res.status(400).json({
         status: 400,
-        errors,
+        error: errors.error.details[0].message,
       });
     }
+    const { type, name } = req.body;
     dbConfig.query('INSERT INTO politico_andela.offices (name, type) VALUES ($1, $2) RETURNING *', [name, type])
       .then((office) => {
         if (office.rowCount > 0) {
@@ -76,4 +75,4 @@ class OfficeController {
 }
 
 
-export default OfficeController;
+export default OfficesController;

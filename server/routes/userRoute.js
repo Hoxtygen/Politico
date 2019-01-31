@@ -7,6 +7,6 @@ const usersRouter = Router();
 
 usersRouter.get('/users', verify.verifyToken, UserController.getAllUsers);
 usersRouter.post('/signup', UserController.addNewUser);
-usersRouter.post('/login', validateLogin.login, UserController.login);
+usersRouter.post('/login', UserController.login);
 
 export default usersRouter;

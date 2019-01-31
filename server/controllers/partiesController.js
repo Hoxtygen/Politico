@@ -1,5 +1,6 @@
 import { userInfo } from 'os';
 import dbConfig from '../database/dbConfig';
+import validations from '../helper/validateLogin';
 import Parties from '../database/partyData';
 
 class PartyController {
@@ -62,11 +63,13 @@ class PartyController {
   }
 
   static addNewParty(req, res) {
-    req.checkBody('name', 'name field is require').notEmpty().trim();
-    req.checkBody('Acronym', 'Acronym field is require').notEmpty().trim();
-    req.checkBody('hqAddress', 'hqAddress field is require').notEmpty().trim();
-    req.checkBody('logoUrl', 'logoUrl field is require').notEmpty().isURL().trim();
-    const errors = req.validationErrors();
+    const errors = validations.validateNewParty(req.body);
+    if (errors.error) {
+      return res.status(400).json({
+        status: 400,
+        error: errors.error.details[0].message,
+      });
+    }
     if (errors) {
       return res.status(400).json({
         status: 400,
@@ -99,11 +102,13 @@ class PartyController {
   }
 
   static editParty(req, res) {
-    req.checkBody('name', 'name field is require').notEmpty().trim();
-    req.checkBody('Acronym', 'Acronym field is require').notEmpty().trim();
-    req.checkBody('hqAddress', 'hqAddress field is require').notEmpty().trim();
-    req.checkBody('logoUrl', 'logoUrl field is require').notEmpty().isURL().trim();
-    const errors = req.validationErrors();
+    const errors = validations.validateNewParty(req.body);
+    if (errors.error) {
+      return res.status(400).json({
+        status: 400,
+        error: errors.error.details[0].message,
+      });
+    }
     if (errors) {
       return res.status(400).json({
         status: 400,
