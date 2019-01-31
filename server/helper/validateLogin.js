@@ -11,6 +11,12 @@ module.exports = {
 
     check('password').not().isEmpty(),
   ],
+  newParty: [
+    check('name').not().isEmpty(),
+    check('Acronym').not().isEmpty(),
+    check('hqaddress').not().isEmpty(),
+    check('logoUrl').not().isEmpty().isURL(),
+  ],
   errorFormatter: ({
     location, msg, param, value, nestedErrors,
   }) => ({

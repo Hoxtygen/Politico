@@ -1,3 +1,4 @@
+import { userInfo } from 'os';
 import dbConfig from '../database/dbConfig';
 import Parties from '../database/partyData';
 
@@ -54,79 +55,89 @@ class PartyController {
           error: 'Party not found',
         });
       })
-      .catch((err) => {
-        return res.status(404).json({
-          status: 'error',
-          data: err.message,
-        });
-      });
+      .catch(err => res.status(404).json({
+        status: 'error',
+        data: err.message,
+      }));
   }
 
   static addNewParty(req, res) {
-    const {
-      name, Acronym, hqAddress, logoUrl,
-    } = req.body;
-    if (!name || !Acronym || !hqAddress || !logoUrl) {
+    req.checkBody('name', 'name field is require').notEmpty().trim();
+    req.checkBody('Acronym', 'Acronym field is require').notEmpty().trim();
+    req.checkBody('hqAddress', 'hqAddress field is require').notEmpty().trim();
+    req.checkBody('logoUrl', 'logoUrl field is require').notEmpty().isURL().trim();
+    const errors = req.validationErrors();
+    if (errors) {
       return res.status(400).json({
-        message: 'Missing fields not allowed',
+        status: 400,
+        errors,
       });
     }
-
-    const newParty = {
-      id: Parties.length + 1,
+    const {
       name,
       Acronym,
       hqAddress,
       logoUrl,
-    };
-    Parties.push(newParty);
-    return res.status(201).json({
-      status: 201,
-      data: newParty,
-    });
+    } = req.body;
+    dbConfig.query('INSERT INTO politico_andela.parties (name, Acronym, hqAddress, logoUrl')
+      .then((party) => {
+        if (party.rowCount > 0) {
+          return res.status(201).json({
+            status: 201,
+            data: party.rows,
+          });
+        }
+        return res.status(400).json({
+          status: 400,
+          error: 'Party could not be added',
+        });
+      })
+      .catch(err => res.status(400).json({
+        status: 400,
+        error: err.message,
+      }));
   }
 
   static editParty(req, res) {
-    const {
-      name, Acronym, hqAddress, logoUrl,
-    } = req.body;
-
-    if (!name || !Acronym || !hqAddress || !logoUrl) {
+    req.checkBody('name', 'name field is require').notEmpty().trim();
+    req.checkBody('Acronym', 'Acronym field is require').notEmpty().trim();
+    req.checkBody('hqAddress', 'hqAddress field is require').notEmpty().trim();
+    req.checkBody('logoUrl', 'logoUrl field is require').notEmpty().isURL().trim();
+    const errors = req.validationErrors();
+    if (errors) {
       return res.status(400).json({
-        message: 'Missing fields not allowed',
+        status: 400,
+        errors,
       });
     }
-
-    const partyId = parseInt(req.params.id, 10);
-    let partyToEdit;
-    let partyToEditIndex;
-    Parties.filter((party, index) => {
-      if (party.id === partyId) {
-        partyToEdit = party;
-        partyToEditIndex = index;
-      }
-    });
-
-    if (!partyToEdit) {
-      return res.status(404).json({
-        status: 404,
-        error: 'Party not found',
+    const {
+      name,
+      Acronym,
+      hqAddress,
+      logoUrl,
+    } = req.body;
+    const id = parseInt(req.params.id, 10);
+    const query = `UPDATE politico_andela.parties SET name =${name}, Acronym = '${Acronym}', hqAddress = '${hqAddress}', logoUrl = '${logoUrl}' WHERE id = ${id} RETURNING *`;
+    dbConfig.query(query)
+      .then((party) => {
+        if (party.rowCount > 0) {
+          return res.status(200).json({
+            status: 200,
+            message: 'Party updated',
+            data: party.rows,
+          });
+        }
+        return res.status(400).json({
+          status: 400,
+          error: 'Party cannot be updated',
+        });
+      })
+      .catch((err) => {
+        res.status(404).json({
+          status: 404,
+          error: err.message,
+        });
       });
-    }
-
-    const updatedParty = {
-      id: partyToEdit.id,
-      name: req.body.name || partyToEdit.name,
-      Acronym: req.body.Acronym || partyToEdit.Acronym,
-      hqAddress: req.body.hqAddress || partyToEdit.hqAddress,
-      logoUrl: req.body.logoUrl || partyToEdit.logoUrl,
-    };
-
-    Parties.splice(partyToEditIndex, 1, updatedParty);
-    return res.status(200).json({
-      status: 200,
-      data: updatedParty,
-    });
   }
 }
 

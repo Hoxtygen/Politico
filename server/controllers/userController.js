@@ -1,4 +1,5 @@
 import encrypt from './encrypt';
+import validateLogin from '../helper/validateLogin';
 import dbConfig from '../database/dbConfig';
 
 class UserController {
@@ -14,6 +15,8 @@ class UserController {
 
   static login(req, res) {
     const { email, password } = req.body;
+    const errors = validateLogin.nestedErrors;
+    console.log(errors);
     dbConfig.query('SELECT * FROM politico_andela.users WHERE email = $1', [email])
       .then((user) => {
         if (!user.rows[0]) {
