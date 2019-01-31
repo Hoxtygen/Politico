@@ -3,11 +3,11 @@ import validations from '../helper/validateLogin';
 
 class VoteController {
   static addNewVote(req, res) {
-    const errors = validations.validateVotes(req.body);
-    if (errors) {
-      res.status(400).json({
+    const voteErrors = validations.validateVotes(req.body);
+    if (voteErrors.error) {
+      return res.status(400).json({
         status: 400,
-        error: errors.error.details[0].message,
+        error: voteErrors.error.details[0].message,
       });
     }
 

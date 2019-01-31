@@ -1,38 +1,5 @@
-// import { check, validationResult } from 'express-validator/check';
-// import Validator from 'express-validator';
-
-/* module.exports = {
-  login: [
-    check('email')
-      .not().isEmpty().withMessage('Email field is required')
-      .isEmail()
-      .withMessage('Invalid email'),
-
-    check('password').not().isEmpty(),
-  ],
-  newParty: [
-    check('name').not().isEmpty(),
-    check('Acronym').not().isEmpty(),
-    check('hqaddress').not().isEmpty(),
-    check('logoUrl').not().isEmpty().isURL(),
-  ],
-  errorFormatter: ({
-    location, msg, param, value, nestedErrors,
-  }) => ({
-    type: 'Error',
-    name: 'Signup failure',
-    location,
-    message: msg,
-    param,
-    value,
-    nestedErrors,
-  }),
-};
- */
-
 import Joi from 'joi';
-/* const { check, validationResult } = require('express-validator/check');
-; */
+
 const validateLogin = (login) => {
   const schema = {
     email: Joi.string().email({ minDomainAtoms: 2 }).required(),
@@ -74,9 +41,9 @@ const validateNewParty = (newParty) => {
 
 const validateVotes = (votes) => {
   const schema = {
-    office: Joi.number().required(),
-    candidate: Joi.number().required(),
-    voter: Joi.number().required(),
+    office: Joi.required(),
+    candidate: Joi.required(),
+    voter: Joi.required(),
   };
   return Joi.validate(votes, schema);
 };

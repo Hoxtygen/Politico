@@ -52,16 +52,16 @@ class UserController {
 
 
   static addNewUser(req, res) {
-    const errors = validations.validateNewUser(req.body);
-    if (errors) {
-      res.status(400).json({
-        status: 400,
-        errors: errors.error.details[0].message,
-      });
-    }
     let {
       firstname, lastname, othername, email, phonenumber, passporturl, password,
     } = req.body;
+    const errors = validations.validateNewUser(req.body);
+    if (errors.error) {
+      return res.status(400).json({
+        status: 400,
+        error: errors.error.details[0].message,
+      });
+    }
     password = encrypt.encryptPwd(password);
     const newUser = {
       firstname,
