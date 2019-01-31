@@ -1,47 +1,65 @@
+import dbConfig from '../database/dbConfig';
 import Parties from '../database/partyData';
 
-class partyController {
+class PartyController {
   static getAllParties(req, res) {
-    return res.status(200).json({
-      status: 200,
-      data: Parties,
-    });
+    dbConfig.query('SELECT * FROM politico_andela.parties')
+      .then(parties => res.status(200).json({
+        status: 200,
+        data: parties.rows,
+      }))
+      .catch((err) => {
+        if (err) {
+          return res.status(400).json({
+            status: 400,
+            error: err.message,
+          });
+        }
+      });
   }
 
   static getOneParty(req, res) {
-    const getParty = Parties.find(party => party.id === parseInt(req.params.id, 10));
-    if (getParty) {
-      res.status(200).json({
-        status: 200,
-        data: getParty,
-      });
-    } else {
-      res.status(404).json({
-        status: 404,
-        error: 'Party does not exist',
-      });
-    }
+    const { id } = req.params;
+    dbConfig.query(`SELECT * FROM politico_andela.parties WHERE id = ${id}`)
+      .then((party) => {
+        if (party.rowCount > 0) {
+          return res.status(200).json({
+            status: 200,
+            data: party.rows,
+          });
+        }
+        return res.status(404).json({
+          status: 404,
+          error: 'The party you are looking for does not exist',
+        });
+      })
+      .catch(err => res.status(400).json({
+        status: 400,
+        error: err.message,
+      }));
   }
 
   static deleteParty(req, res) {
     const id = parseInt(req.params.id, 10);
-    let deleted;
-    Parties.filter((party, index) => {
-      if (party.id === id) {
-        Parties.splice(index, 1);
-        deleted = party;
-      }
-    });
-    if (deleted) {
-      return res.status(200).json({
-        status: 200,
-        message: 'party deleted successfully',
+    dbConfig.query(`DELETE FROM politico_andela.parties WHERE id = ${id}`)
+      .then((party) => {
+        if (party.rowCount) {
+          return res.status(200).json({
+            status: 200,
+            message: 'Party deleted',
+          });
+        }
+        return res.status(404).json({
+          status: 404,
+          error: 'Party not found',
+        });
+      })
+      .catch((err) => {
+        return res.status(404).json({
+          status: 'error',
+          data: err.message,
+        });
       });
-    }
-    return res.status(404).json({
-      status: 404,
-      error: 'Party not found',
-    });
   }
 
   static addNewParty(req, res) {
@@ -112,4 +130,4 @@ class partyController {
   }
 }
 
-export default partyController;
+export default PartyController;
