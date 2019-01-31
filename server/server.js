@@ -4,6 +4,7 @@ import Validator from 'express-validator';
 import partiesRouter from './routes/partiesRoute';
 import officeRouter from './routes/officeRoute';
 import usersRouter from './routes/userRoute';
+import votesRouter from './routes/votesRoute';
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
 app.use('/api/v1', partiesRouter);
 app.use('/api/v1', officeRouter);
 app.use('/api/v1/auth', usersRouter);
+app.use('/api/v1', votesRouter);
 
 //  load up the server
 app.listen(port, () => console.log(`Server running on port: ${port}`));

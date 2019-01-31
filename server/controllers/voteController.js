@@ -17,7 +17,6 @@ class VoteController {
     const {
       office, candidate, voter,
     } = req.body;
-    createdBy = req.params.voter;
     dbConfig.query('INSERT INTO politico_andela.votes (office, candidate, voter) VALUES ($1, $2, $3) RETURNING *', [office, candidate, voter])
       .then((vote) => {
         if (vote.rowCount > 0) {
@@ -34,13 +33,11 @@ class VoteController {
       .catch((err) => {
         if (err.message.includes('unique')) {
           return res.status(400).json({
-            res.status(400).json({
-              status: 400,
-              error: 'You have already voted for this office',
-            })
-          })
+            status: 400,
+            error: 'You have already voted for this office',
+          });
         }
-      })
+      });
   }
 }
 
