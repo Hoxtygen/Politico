@@ -7,11 +7,11 @@ class RegisterCandidate {
     console.log(req.body);
     console.log(req.params.id);
     dbConfig.query('INSERT INTO politico_andela.candidates (office, candidate) VALUES ($1, $2) RETURNING *', [office, candidate])
-      .then((candi) => {
-        if (candi.rowCount > 0) {
+      .then((politician) => {
+        if (politician.rowCount > 0) {
           return res.status(201).json({
             status: 201,
-            data: candi.rows,
+            data: politician.rows,
           });
         }
         return res.status(400).json({
@@ -31,5 +31,3 @@ class RegisterCandidate {
 }
 
 export default RegisterCandidate;
-
-//  /office/<user-id>/register
