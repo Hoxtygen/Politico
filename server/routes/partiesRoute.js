@@ -1,10 +1,11 @@
 import { Router } from 'express';
-import partiesController from '../controllers/partiesController';
+import verify from '../controllers/verifyToken';
+import PartiesController from '../controllers/partiesController';
 
 const partiesRouter = Router();
-partiesRouter.get('/parties', partiesController.getAllParties);
-partiesRouter.get('/parties/:id', partiesController.getOneParty);
-partiesRouter.delete('/parties/:id', partiesController.deleteParty);
-partiesRouter.post('/parties', partiesController.addNewParty);
-partiesRouter.patch('/parties/:id', partiesController.editParty);
+partiesRouter.get('/parties', verify.verifyToken, PartiesController.getAllParties);
+partiesRouter.get('/parties/:id', verify.verifyToken, PartiesController.getOneParty);
+partiesRouter.delete('/parties/:id', PartiesController.deleteParty);
+partiesRouter.post('/parties', verify.verifyToken, PartiesController.addNewParty);
+partiesRouter.patch('/parties/:id', verify.verifyToken, PartiesController.editParty);
 export default partiesRouter;

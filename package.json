@@ -8,12 +8,11 @@
     "dev": "babel-watch server/server.js",
     "build-babel": "babel -d ./dist ./server -s",
     "build": "npm run clean && npm run build-babel",
-    "test": "mocha --require babel-register server/tests/*.js --exit",
-    "cover": "istanbul cover _mocha",
+    "test": "nyc mocha --require babel-register server/tests/*.js --exit",
     "start": "npm run build && node ./dist/server.js",
     "lint": "./node_modules/.bin/eslint server --fix",
-    "createTables": "psql -U postgres -f store.sql",
-    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
+    "createQueries": "psql -U postgres -f createQueries.sql",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -44,6 +43,7 @@
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "express-validator": "^5.3.1",
+    "joi": "^14.3.1",
     "jsonwebtoken": "^8.4.0",
     "mocha": "^5.2.0",
     "morgan": "^1.9.1",

@@ -53,3 +53,28 @@ INSERT INTO politico_andela.parties (name, acronym, hqaddress, logoUrl) VALUES (
 INSERT INTO politico_andela.parties (name, acronym, hqaddress, logoUrl) VALUES ('Progressive People Alliance',  'PPA', 'Wadata Plaza, Michael Okpara Way, Zone 5, Wuse, Abuja', 'http://i38.photobucket.com/albums/e143/hoxtygen/Politico/ppa_zpsyjqgtnex.gif');
 INSERT INTO politico_andela.parties (name, acronym, hqaddress, logoUrl) VALUES ('Democratic Peoples Party',  'DPP', 'No. 1 Nouakchott Street Zone 1, Wuse, Abuja', 'http://i38.photobucket.com/albums/e143/hoxtygen/Politico/dpp_zpszds3pxzf.jpg');
 INSERT INTO politico_andela.parties (name, acronym, hqaddress, logoUrl) VALUES ('Labour Party',  'LP', 'Dabo Shopping Mall, 2nd Floor, Plot 73 Ladoke Akintola Boulevard, Garki, Abuja', 'http://i38.photobucket.com/albums/e143/hoxtygen/Politico/LP_zpstzetsgna.jpg');
+
+CREATE TABLE IF NOT EXISTS politico_andela.candidates (
+    id SERIAL PRIMARY KEY NOT NULL,
+    office INTEGER REFERENCES politico_andela.offices(id) NOT NULL,
+    party INTEGER REFERENCES politico_andela.parties(id) NOT NULL,
+    candidate INTEGER REFERENCES politico_andela.users(id) NOT NULL,
+    FOREIGN KEY(office) REFERENCES politico_andela.offices(id),
+    FOREIGN key(party) REFERENCES politico_andela.parties(id),
+    FOREIGN KEY(candidate) REFERENCES politico_andela.users(id)
+);
+
+INSERT INTO politico_andela.candidates (office, party,candidate) VALUES (2, 1, 1);
+
+CREATE TABLE IF NOT EXISTS politico_andela.votes (
+    id SERIAL NOT NULL,
+    createdOn DATE NOT NULL DEFAULT CURRENT_DATE,
+    voter INT REFERENCES politico_andela.users(id) NOT NULL,
+    office INTEGER REFERENCES politico_andela.offices(id) NOT NULL,
+    candidate INTEGER REFERENCES politico_andela.candidates(id) NOT NULL,
+    FOREIGN key(voter) REFERENCES politico_andela.users(id),
+    FOREIGN KEY(candidate) REFERENCES politico_andela.candidates(id),
+    PRIMARY KEY (office, voter)
+);
+
+INSERT INTO politico_andela.votes (office, voter,candidate) VALUES (1, 1, 1);

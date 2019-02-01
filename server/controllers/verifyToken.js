@@ -9,7 +9,7 @@ const verify = {
     if (!token) {
       res.status(400).json({
         status: 400,
-        message: 'Access denied',
+        message: 'Access denied, you must be logged in to access this resource',
       });
     } else {
       jwt.verify(token, process.env.SECRET_KEY, (error, decoded) => {
