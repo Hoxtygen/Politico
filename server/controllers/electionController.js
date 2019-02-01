@@ -4,8 +4,6 @@ class RegisterCandidate {
   static register(req, res) {
     const candidate = req.params.id;
     const { office } = req.body;
-    console.log(req.body);
-    console.log(req.params.id);
     dbConfig.query('INSERT INTO politico_andela.candidates (office, candidate) VALUES ($1, $2) RETURNING *', [office, candidate])
       .then((politician) => {
         if (politician.rowCount > 0) {
@@ -27,6 +25,19 @@ class RegisterCandidate {
           });
         }
       });
+  }
+
+  static getResult(req, res) {
+    const office = parseInt(req.params.id, 10);
+    dbConfig.query(`SELECT candidate, office, count (candidate) AS result FROM politico_andela.votes where office = $1 GROUP BY office, candidate`, [office])
+      .then(result => res.status(200).json({
+        status: 200,
+        data: result.rows,
+      }))
+      .catch(err => res.status(400).json({
+        status: 400,
+        error: err.message,
+      }));
   }
 }
 

@@ -5,7 +5,7 @@ import partiesRouter from './routes/partiesRoute';
 import officesRouter from './routes/officesRoute';
 import usersRouter from './routes/userRoute';
 import votesRouter from './routes/votesRoute';
-import registerCandidateRouter from './routes/candidateOfficeRoute';
+import registerCandidateRouter from './routes/electionRoute';
 
 const app = express();
 
