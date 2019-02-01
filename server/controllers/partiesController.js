@@ -82,7 +82,7 @@ class PartyController {
       hqAddress,
       logoUrl,
     } = req.body;
-    dbConfig.query('INSERT INTO politico_andela.parties (name, Acronym, hqAddress, logoUrl')
+    dbConfig.query('INSERT INTO politico_andela.parties (name, Acronym, hqAddress, logoUrl) VALUES ($1, $2, $3, $4) RETURNING *', [name, Acronym, hqAddress, logoUrl])
       .then((party) => {
         if (party.rowCount > 0) {
           return res.status(201).json({
