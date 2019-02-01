@@ -5,6 +5,7 @@ import partiesRouter from './routes/partiesRoute';
 import officesRouter from './routes/officesRoute';
 import usersRouter from './routes/userRoute';
 import votesRouter from './routes/votesRoute';
+import registerCandidateRouter from './routes/candidateOfficeRoute';
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use('/api/v1', partiesRouter);
 app.use('/api/v1', officesRouter);
 app.use('/api/v1/auth', usersRouter);
 app.use('/api/v1', votesRouter);
+app.use('/api/v1/office', registerCandidateRouter);
 
 //  load up the server
 app.listen(port, () => console.log(`Server running on port: ${port}`));
