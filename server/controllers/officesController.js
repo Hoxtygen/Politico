@@ -21,6 +21,14 @@ class OfficesController {
 
   static getOneOffice(req, res) {
     const id = parseInt(req.params.id, 10);
+    /*  const errors = validations.validateGetOneOffice(id);
+    if (errors.error) {
+      console.log(errors.error);
+      return res.status(400).json({
+        status: 400,
+        error: errors.error.details[0].message,
+      });
+    } */
     dbConfig.query(`SELECT * FROM politico_andela.offices WHERE id = ${id}`)
       .then((office) => {
         if (office.rowCount > 0) {

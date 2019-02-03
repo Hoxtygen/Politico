@@ -29,6 +29,13 @@ const validateNewOffice = (newOffice) => {
   return Joi.validate(newOffice, schema);
 };
 
+const validateGetOneOffice = (oneOffice) => {
+  const schema = {
+    id: Joi.number().required(),
+  };
+  return Joi.validate(oneOffice, schema);
+};
+
 const validateNewParty = (newParty) => {
   const schema = {
     name: Joi.string().required(),
@@ -48,13 +55,31 @@ const validateVotes = (votes) => {
   return Joi.validate(votes, schema);
 };
 
+const validateCandidateRegistration = (candidate) => {
+  const schema = {
+    candidate: Joi.number().required(),
+    office: Joi.number().required(),
+  };
+  return Joi.validate(candidate, schema);
+};
+
+const validateResult = (office) => {
+  const schema = {
+    office: Joi.number().required(),
+  };
+  return Joi.validate(office, schema);
+};
+
 
 const validations = {
   validateLogin,
   validateNewUser,
   validateNewOffice,
+  validateGetOneOffice,
   validateNewParty,
   validateVotes,
+  validateCandidateRegistration,
+  validateResult,
 };
 
 export default validations;
