@@ -29,6 +29,13 @@ const validateNewOffice = (newOffice) => {
   return Joi.validate(newOffice, schema);
 };
 
+const validateGetOneOffice = (oneOffice) => {
+  const schema = {
+    id: Joi.number().required(),
+  };
+  return Joi.validate(oneOffice, schema);
+};
+
 const validateNewParty = (newParty) => {
   const schema = {
     name: Joi.string().required(),
@@ -68,6 +75,7 @@ const validations = {
   validateLogin,
   validateNewUser,
   validateNewOffice,
+  validateGetOneOffice,
   validateNewParty,
   validateVotes,
   validateCandidateRegistration,
