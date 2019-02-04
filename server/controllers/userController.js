@@ -86,7 +86,7 @@ class UserController {
     dbConfig.query('INSERT INTO politico_andela.users (firstname, lastname, othername, email, phonenumber, passporturl, password) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *', [firstname, lastname, othername, email, phonenumber, passporturl, password])
       .then((user) => {
         if (user.rowCount > 0) {
-          const token = encrypt.createToken(user.rows[0].email);
+          const token = encrypt.createToken({ email: user.rows[0].email, isAdmin: user.rows[0].isAdmin });
           res.status(201).json({
             status: 201,
             data: user.rows,

@@ -70,12 +70,7 @@ class PartyController {
         error: errors.error.details[0].message,
       });
     }
-    if (errors) {
-      return res.status(400).json({
-        status: 400,
-        errors,
-      });
-    }
+    
     const {
       name,
       Acronym,

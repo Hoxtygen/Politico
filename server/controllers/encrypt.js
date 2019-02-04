@@ -11,9 +11,9 @@ const encrypt = {
   compare(encryptPwd, password) {
     return bcrypt.compareSync(password, encryptPwd);
   },
-  createToken(email) {
+  createToken(payload) {
     const token = jwt.sign({
-      email,
+      payload,
     },
     process.env.SECRET_KEY, { expiresIn: '3d' });
     return token;
