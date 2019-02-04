@@ -99,3 +99,5 @@ CREATE TABLE IF NOT EXISTS politico_andela.votes (
     FOREIGN KEY(candidate) REFERENCES politico_andela.users(id),
     PRIMARY KEY (office, voter)
 );
+
+INSERT INTO politico_andela.votes (office, voter, candidate) VALUES (2, 1);

@@ -3,7 +3,9 @@ import { Pool } from 'pg';
 
 dotenv.config();
 
-const connectionString = process.env.DATABASE_URL;
+const { DATABASE_URL, DATABASE_URL_TEST, NODE_ENV } = process.env;
+
+const connectionString = NODE_ENV === 'test' ? DATABASE_URL_TEST : DATABASE_URL;
 
 const pool = new Pool({
   connectionString,

@@ -4,6 +4,6 @@ import VoteController from '../controllers/voteController';
 
 const votesRouter = Router();
 
-votesRouter.post('/votes', verify.verifyToken, VoteController.addNewVote);
+votesRouter.post('/votes',/*  verify.verifyToken, */ VoteController.addNewVote);
 
 export default votesRouter;

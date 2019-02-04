@@ -25,8 +25,8 @@ class UserController {
     dbConfig.query('SELECT * FROM politico_andela.users WHERE email = $1', [email])
       .then((user) => {
         if (!user.rows[0]) {
-          return res.status(400).json({
-            status: 400,
+          return res.status(401).json({
+            status: 401,
             error: 'Invalid email supplied',
           });
         }
@@ -40,6 +40,17 @@ class UserController {
         const token = encrypt.createToken(user.rows[0].email);
         return res.status(200).json({
           token,
+          data: [
+            {
+              firstname: user.rows[0].firstname,
+              lastname: user.rows[0].lastname,
+              email: user.rows[0].email,
+              othername: user.rows[0].othername,
+              phonenumber: user.rows[0].phonenumber,
+              passporturl: user.rows[0].passporturl,
+              password: user.rows[0].password,
+            },
+          ],
         });
       })
       .catch((err) => {
@@ -75,9 +86,11 @@ class UserController {
     dbConfig.query('INSERT INTO politico_andela.users (firstname, lastname, othername, email, phonenumber, passporturl, password) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *', [firstname, lastname, othername, email, phonenumber, passporturl, password])
       .then((user) => {
         if (user.rowCount > 0) {
+          const token = encrypt.createToken(user.rows[0].email);
           res.status(201).json({
             status: 201,
             data: user.rows,
+            token,
           });
         } else {
           res.status(400).json({

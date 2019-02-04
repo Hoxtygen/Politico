@@ -1,4 +1,4 @@
-import chai from 'chai';
+/* import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../server';
 
@@ -53,3 +53,4 @@ describe('Political Office', () => {
     });
   });
 });
+ */

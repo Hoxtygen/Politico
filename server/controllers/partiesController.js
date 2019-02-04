@@ -12,8 +12,8 @@ class PartyController {
       }))
       .catch((err) => {
         if (err) {
-          return res.status(400).json({
-            status: 400,
+          return res.status(500).json({
+            status: 500,
             error: err.message,
           });
         }
