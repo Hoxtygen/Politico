@@ -1,11 +1,12 @@
 \c politico_test
 CREATE SCHEMA politico_andela;
 
-DROP TABLE IF EXISTS  politico_andela.candidates CASCADE;
-DROP TABLE IF EXISTS politico_andela.votes CASCADE;
+
 DROP TABLE IF EXISTS politico_andela.users CASCADE; 
 DROP TABLE IF EXISTS politico_andela.offices CASCADE;
 DROP TABLE IF EXISTS politico_andela.parties CASCADE;
+DROP TABLE IF EXISTS politico_andela.votes CASCADE;
+DROP TABLE IF EXISTS  politico_andela.candidates CASCADE;
 
 CREATE TABLE IF NOT EXISTS politico_andela.Users (
     id SERIAL PRIMARY KEY NOT NULL,
@@ -48,9 +49,9 @@ CREATE TABLE IF NOT EXISTS politico_andela.votes (
     createdOn DATE NOT NULL DEFAULT CURRENT_DATE,
     voter INT REFERENCES politico_andela.users(id) NOT NULL,
     office INTEGER REFERENCES politico_andela.offices(id) NOT NULL,
-    candidate INTEGER REFERENCES politico_andela.users(id) NOT NULL,
+    candidate INTEGER REFERENCES politico_andela.candidates(id) NOT NULL,
     FOREIGN key(voter) REFERENCES politico_andela.users(id),
-    FOREIGN KEY(candidate) REFERENCES politico_andela.users(id),
+    FOREIGN KEY(candidate) REFERENCES politico_andela.candidates(id),
     PRIMARY KEY (office, voter)
 );
 

@@ -38,6 +38,7 @@ describe('signup', () => {
       .post('/api/v1/auth/login')
       .send(user)
       .end((err, res) => {
+        token = res.body.data[0].token;
         res.should.have.status(200);
         res.body.should.be.a('object');
         done();
@@ -53,6 +54,7 @@ describe('Create a political office', () => {
     };
     chai.request(app)
       .post('/api/v1/offices')
+      .set('api-access-token', token)
       .send(newOffice)
       .end((err, res) => {
         res.should.have.status(201);
@@ -68,6 +70,7 @@ describe('Create a political office', () => {
     const id = 3;
     chai.request(app)
       .get(`/api/v1/offices/${id}`)
+      .set('api-access-token', token)
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
@@ -78,6 +81,7 @@ describe('Create a political office', () => {
   it('should return all offices', (done) => {
     chai.request(app)
       .get('/api/v1/offices')
+      .set('api-access-token', token)
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
@@ -93,6 +97,7 @@ describe('Political Party', () => {
     const id = 3;
     chai.request(app)
       .get(`/api/v1/parties/${id}`)
+      .set('api-access-token', token)
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
@@ -103,6 +108,7 @@ describe('Political Party', () => {
   it('should get all political parties', (done) => {
     chai.request(app)
       .get('/api/v1/parties')
+      .set('api-access-token', token)
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
@@ -114,6 +120,7 @@ describe('Political Party', () => {
     const id = 300;
     chai.request(app)
       .get(`/api/v1/parties/${id}`)
+      .set('api-access-token', token)
       .end((err, res) => {
         res.should.have.status(404);
         done();
@@ -124,6 +131,7 @@ describe('Political Party', () => {
     const id = 4;
     chai.request(app)
       .delete(`/api/v1/parties/${id}`)
+      .set('api-access-token', token)
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
@@ -151,6 +159,7 @@ describe('Political Party', () => {
     chai.request(app)
       .post('/api/v1/parties')
       .send(newParty)
+      .set('api-access-token', token)
       .end((err, res) => {
         // console.log(res);
         res.should.have.status(201);
@@ -163,7 +172,7 @@ describe('Political Party', () => {
       });
   });
 
- /*  it('Given an Id, this route should edit the party information', (done) => {
+  /*  it('Given an Id, this route should edit the party information', (done) => {
     const newPartyName = {
       name: 'National People Party',
 
@@ -180,12 +189,13 @@ describe('Political Party', () => {
   }); */
 });
 
- describe('Candidate Registration', () => {
-  //const office = { office: 2 };
+describe('Candidate Registration', () => {
+  // const office = { office: 2 };
   it('should register a candidate', (done) => {
     chai.request(app)
       .post('/api/v1/office/1/register')
       .send({ office: 2 })
+      .set('api-access-token', token)
       .end((err, res) => {
         res.should.have.status(201);
         res.body.should.be.a('object');
@@ -194,7 +204,7 @@ describe('Political Party', () => {
   });
 });
 
- describe('Voting', () => {
+describe('Voting', () => {
   it('should vote for  a candidate', (done) => {
     const vote = {
       office: 2,
@@ -204,13 +214,10 @@ describe('Political Party', () => {
     chai.request(app)
       .post('/api/v1/votes')
       .send(vote)
-      .then((res) => {
+      .end((err, res) => {
         res.should.have.status(201);
         res.body.should.be.a('object');
         done();
-      })
-      .catch((err) => {
-        throw err;
       });
   });
 });

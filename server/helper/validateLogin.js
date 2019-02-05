@@ -17,6 +17,7 @@ const validateNewUser = (newUser) => {
     phonenumber: Joi.required(),
     passporturl: Joi.required(),
     password: Joi.required(),
+    isadmin: Joi.boolean(),
   };
   return Joi.validate(newUser, schema);
 };

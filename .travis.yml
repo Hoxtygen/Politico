@@ -6,4 +6,4 @@ before_script:
 scripts:
  - "npm test"
 
-after_success: coveralls
+after_success: npm run coverage

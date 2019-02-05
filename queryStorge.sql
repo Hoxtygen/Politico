@@ -101,3 +101,6 @@ CREATE TABLE IF NOT EXISTS politico_andela.votes (
 );
 
 INSERT INTO politico_andela.votes (office, voter, candidate) VALUES (2, 1);
+
+alter column 
+alter table users alter column email drop not null;
