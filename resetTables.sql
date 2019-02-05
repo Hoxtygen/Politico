@@ -1,7 +1,11 @@
 \c politico_test
 CREATE SCHEMA politico_andela;
 
-DROP TABLE IF EXISTS politico_andela.users, politico_andela.offices, politico_andela.parties, politico_andela.candidates, politico_andela.votes;
+DROP TABLE IF EXISTS  politico_andela.candidates CASCADE;
+DROP TABLE IF EXISTS politico_andela.votes CASCADE;
+DROP TABLE IF EXISTS politico_andela.users CASCADE; 
+DROP TABLE IF EXISTS politico_andela.offices CASCADE;
+DROP TABLE IF EXISTS politico_andela.parties CASCADE;
 
 CREATE TABLE IF NOT EXISTS politico_andela.Users (
     id SERIAL PRIMARY KEY NOT NULL,
@@ -29,7 +33,7 @@ CREATE TABLE IF NOT EXISTS politico_andela.parties (
     logoUrl VARCHAR(200) UNIQUE NOT NULL
 );
 
-/* CREATE TABLE IF NOT EXISTS candidates (
+ CREATE TABLE IF NOT EXISTS politico_andela.candidates (
     id SERIAL  NOT NULL,
     office INTEGER REFERENCES politico_andela.offices(id) NOT NULL,
     candidate INTEGER REFERENCES politico_andela.users(id) NOT NULL,
@@ -39,7 +43,7 @@ CREATE TABLE IF NOT EXISTS politico_andela.parties (
 );
 
 
-CREATE TABLE IF NOT EXISTS votes (
+CREATE TABLE IF NOT EXISTS politico_andela.votes (
     id SERIAL NOT NULL,
     createdOn DATE NOT NULL DEFAULT CURRENT_DATE,
     voter INT REFERENCES politico_andela.users(id) NOT NULL,
@@ -48,11 +52,11 @@ CREATE TABLE IF NOT EXISTS votes (
     FOREIGN key(voter) REFERENCES politico_andela.users(id),
     FOREIGN KEY(candidate) REFERENCES politico_andela.users(id),
     PRIMARY KEY (office, voter)
-); */
+);
 
 
 
-INSERT INTO politico_andela.Users (firstName, lastName, otherName, email, phoneNumber, passportUrl, isAdmin, password) VALUES ('Wasiu', 'Idowu', 'Oriyomi', 'hoxtygen@live.com', '08060184972', 'https://www.mypassport.com', 'true', '2a$14$phZP9Luv78eE3Tu1sf2wd.f5FNc9OHod3WqZIdCiUQIVqPm.PWlDm');
+INSERT INTO politico_andela.Users (firstName, lastName, otherName, email, phoneNumber, passportUrl, isAdmin, password) VALUES ('Wasiu', 'Idowu', 'Oriyomi', 'hoxtygen@live.com', '08060184972', 'https://www.mypassport.com', 'true', 'shaolindragon');
 INSERT INTO politico_andela.Users (firstName, lastName, otherName, email, phoneNumber, passportUrl, password) VALUES ('Wasiu', 'Idowu', 'Oriyomi', 'hoxtygen01@live.com', '08060184972', 'https://www.mypassport1.com', '2a$14$phZP9Luv78eE3Tu1sf2wd.f5FNc9OHod3WqZIdCiUQIVqPm.PWlDm');
 INSERT INTO politico_andela.Users (firstName, lastName, otherName, email, phoneNumber, passportUrl, password) VALUES ('Wasiu', 'Idowu', 'Oriyomi', 'hoxtygen02@live.com', '08060184972', 'https://www.mypassport2.com', '2a$14$phZP9Luv78eE3Tu1sf2wd.f5FNc9OHod3WqZIdCiUQIVqPm.PWlDm');
 INSERT INTO politico_andela.Users (firstName, lastName, otherName, email, phoneNumber, passportUrl, password) VALUES ('Wasiu', 'Idowu', 'Oriyomi', 'hoxtygen03@live.com', '08060184972', 'https://www.mypassport3.com',  '2a$14$phZP9Luv78eE3Tu1sf2wd.f5FNc9OHod3WqZIdCiUQIVqPm.PWlDm');
@@ -76,12 +80,12 @@ INSERT INTO politico_andela.parties (name, acronym, hqaddress, logoUrl) VALUES (
 
 /* INSERT INTO candidates (office, candidate) VALUES (2, 1);
 INSERT INTO candidates (office, candidate) VALUES (2, 2);
-INSERT INTO candidates (office, candidate) VALUES (2, 2);
+INSERT INTO candidates (office, candidate) VALUES (2, 3); */
 
-INSERT INTO votes (office, voter, candidate) VALUES (2, 1, 1);
-INSERT INTO votes (office, voter, candidate) VALUES (2, 2, 1);
+
+/* INSERT INTO votes (office, voter, candidate) VALUES (2, 1, 1); 
 INSERT INTO votes (office, voter, candidate) VALUES (2, 3, 2);
-INSERT INTO votes (office, voter, candidate) VALUES (2, 4, 3); */
-
+INSERT INTO votes (office, voter, candidate) VALUES (2, 4, 3);
+*/
 
 

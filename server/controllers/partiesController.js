@@ -97,29 +97,20 @@ class PartyController {
   }
 
   static editParty(req, res) {
-    const errors = validations.validateNewParty(req.body);
+    /* const errors = validations.validateEditParty(req.params.id, req.body.name);
     if (errors.error) {
       return res.status(400).json({
         status: 400,
         error: errors.error.details[0].message,
       });
-    }
-    if (errors) {
-      return res.status(400).json({
-        status: 400,
-        errors,
-      });
-    }
-    const {
-      name,
-      Acronym,
-      hqAddress,
-      logoUrl,
-    } = req.body;
+    } */
+    
+    const { name } = req.body.name;
     const id = parseInt(req.params.id, 10);
-    const query = `UPDATE politico_andela.parties SET name =${name}, Acronym = '${Acronym}', hqAddress = '${hqAddress}', logoUrl = '${logoUrl}' WHERE id = ${id} RETURNING *`;
-    dbConfig.query(query)
+    //const query = 'UPDATE politico_andela.parties SET name =$1 WHERE id = $2 RETURNING *';
+    dbConfig.query('UPDATE politico_andela.parties SET name =$1 WHERE id = $2 RETURNING *', [name, id])
       .then((party) => {
+        console.log(party.rowCount)
         if (party.rowCount > 0) {
           return res.status(200).json({
             status: 200,

@@ -7,5 +7,5 @@ partiesRouter.post('/', /* verify.verifyToken, */ PartiesController.addNewParty)
 partiesRouter.get('/', /* verify.verifyToken, */ PartiesController.getAllParties);
 partiesRouter.get('/:id', /* verify.verifyToken, */ PartiesController.getOneParty);
 partiesRouter.delete('/:id', PartiesController.deleteParty);
-partiesRouter.patch('/:id', /* verify.verifyToken, */ PartiesController.editParty);
+partiesRouter.patch('/:id/name', /* verify.verifyToken, */ PartiesController.editParty);
 export default partiesRouter;

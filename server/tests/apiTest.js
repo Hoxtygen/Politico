@@ -28,6 +28,21 @@ describe('signup', () => {
         done();
       });
   });
+
+  it('should login a user', (done) => {
+    const user = {
+      email: 'jonoris@gmail.com',
+      password: 'shaolindragon',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(user)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        done();
+      });
+  });
 });
 
 describe('Create a political office', () => {
@@ -137,7 +152,7 @@ describe('Political Party', () => {
       .post('/api/v1/parties')
       .send(newParty)
       .end((err, res) => {
-        //console.log(res);
+        // console.log(res);
         res.should.have.status(201);
         res.body.should.be.a('object');
         /* res.body.data.should.have.a.property('name');
@@ -145,6 +160,57 @@ describe('Political Party', () => {
         res.body.data.should.have.a.property('hqAddress');
         res.body.data.should.have.a.property('logoUrl'); */
         done();
+      });
+  });
+
+ /*  it('Given an Id, this route should edit the party information', (done) => {
+    const newPartyName = {
+      name: 'National People Party',
+
+    };
+    chai.request(app)
+      .patch('/api/v1/parties/1/name')
+      .send(newPartyName)
+      .end((err, res) => {
+        //console.log(res);
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        done();
+      });
+  }); */
+});
+
+ describe('Candidate Registration', () => {
+  //const office = { office: 2 };
+  it('should register a candidate', (done) => {
+    chai.request(app)
+      .post('/api/v1/office/1/register')
+      .send({ office: 2 })
+      .end((err, res) => {
+        res.should.have.status(201);
+        res.body.should.be.a('object');
+        done();
+      });
+  });
+});
+
+ describe('Voting', () => {
+  it('should vote for  a candidate', (done) => {
+    const vote = {
+      office: 2,
+      voter: 1,
+      candidate: 1,
+    };
+    chai.request(app)
+      .post('/api/v1/votes')
+      .send(vote)
+      .then((res) => {
+        res.should.have.status(201);
+        res.body.should.be.a('object');
+        done();
+      })
+      .catch((err) => {
+        throw err;
       });
   });
 });
