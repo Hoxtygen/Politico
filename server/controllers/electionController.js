@@ -28,9 +28,9 @@ class RegisterCandidate {
       })
       .catch((err) => {
         if (err.message.includes('unique')) {
-          return res.status(400).json({
-            status: 400,
-            error: 'You are already a candidate for this office',
+          return res.status(409).json({
+            status: 409,
+            error: 'Candidate already registered for this office',
           });
         }
       });

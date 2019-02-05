@@ -17,6 +17,7 @@ const validateNewUser = (newUser) => {
     phonenumber: Joi.required(),
     passporturl: Joi.required(),
     password: Joi.required(),
+    isadmin: Joi.boolean(),
   };
   return Joi.validate(newUser, schema);
 };
@@ -57,8 +58,8 @@ const validateVotes = (votes) => {
 
 const validateCandidateRegistration = (candidate) => {
   const schema = {
-    candidate: Joi.number().required(),
-    office: Joi.number().required(),
+    candidate: Joi.number().integer().required(),
+    office: Joi.number().integer().required(),
   };
   return Joi.validate(candidate, schema);
 };
@@ -70,6 +71,18 @@ const validateResult = (office) => {
   return Joi.validate(office, schema);
 };
 
+const validateEditParty = (id, name) => {
+  const partyInfo = {
+    id,
+    name,
+  };
+  const schema = {
+    id: Joi.number().integer().required(),
+    name: Joi.string().required(),
+  };
+  return Joi.validate(partyInfo, schema);
+};
+
 
 const validations = {
   validateLogin,
@@ -77,6 +90,7 @@ const validations = {
   validateNewOffice,
   validateGetOneOffice,
   validateNewParty,
+  validateEditParty,
   validateVotes,
   validateCandidateRegistration,
   validateResult,

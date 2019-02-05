@@ -1,7 +1,9 @@
 language: node_js
 node_js:
  - "stable"
+before_script: 
+  - psql -c 'create database politico_test;' -U postgres  
 scripts:
  - "npm test"
 
-after_success: coveralls
+after_success: npm run coverage

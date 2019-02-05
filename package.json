@@ -8,10 +8,11 @@
     "dev": "babel-watch server/server.js",
     "build-babel": "babel -d ./dist ./server -s",
     "build": "npm run clean && npm run build-babel",
-    "test": "cross-env NODE_ENV=test nyc mocha --require babel-register server/tests/*.js --timeout 6000 || exit 0",
+    "test": "cross-env NODE_ENV=test nyc mocha --require babel-register server/tests/*.js --timeout 30000 || exit 0",
     "start": "npm run build && node ./dist/server.js",
     "lint": "./node_modules/.bin/eslint server --fix",
     "createQueries": "psql -U postgres -f createQueries.sql",
+    "adminSeed": "babel-node adminSeed.js",
     "pretest": "psql -U postgres -f resetTables.sql",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },

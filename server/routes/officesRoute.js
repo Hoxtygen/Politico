@@ -4,8 +4,8 @@ import OfficesController from '../controllers/officesController';
 
 const officeRouter = Router();
 
-officeRouter.get('/',/*  verify.verifyToken, */ OfficesController.getAllOffices);
-officeRouter.post('/',/*  verify.verifyToken, */ OfficesController.addNewOffice);
-officeRouter.get('/:id',/*  verify.verifyToken, */ OfficesController.getOneOffice);
+officeRouter.get('/', verify.verifyLoggedIn, OfficesController.getAllOffices);
+officeRouter.post('/', /* verify.verifyLoggedIn, */ verify.verifyAdmin, OfficesController.addNewOffice);
+officeRouter.get('/:id', verify.verifyAdmin, OfficesController.getOneOffice);
 
 export default officeRouter;

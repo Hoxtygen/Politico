@@ -37,25 +37,29 @@ class UserController {
             error: 'Invalid username or password',
           });
         }
-        const token = encrypt.createToken(user.rows[0].email);
+        const data = {
+          email: user.rows[0].email,
+          isadmin: user.rows[0].isadmin,
+        };
+        const token = encrypt.createToken(data);
         return res.status(200).json({
-          token,
+          status: 200,
           data: [
             {
+              token,
               firstname: user.rows[0].firstname,
               lastname: user.rows[0].lastname,
               email: user.rows[0].email,
               othername: user.rows[0].othername,
               phonenumber: user.rows[0].phonenumber,
               passporturl: user.rows[0].passporturl,
-              password: user.rows[0].password,
             },
           ],
         });
       })
       .catch((err) => {
-        res.status(400).json({
-          status: 400,
+        res.status(500).json({
+          status: 500,
           error: err.message,
         });
       });
@@ -64,7 +68,7 @@ class UserController {
 
   static addNewUser(req, res) {
     let {
-      firstname, lastname, othername, email, phonenumber, passporturl, password,
+      firstname, lastname, othername, email, phonenumber, passporturl, password, isadmin
     } = req.body;
     const errors = validations.validateNewUser(req.body);
     if (errors.error) {
@@ -82,15 +86,30 @@ class UserController {
       phonenumber,
       passporturl,
       password,
+      isadmin,
     };
-    dbConfig.query('INSERT INTO politico_andela.users (firstname, lastname, othername, email, phonenumber, passporturl, password) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *', [firstname, lastname, othername, email, phonenumber, passporturl, password])
+    dbConfig.query('INSERT INTO politico_andela.users (firstname, lastname, othername, email, phonenumber, passporturl, password, isadmin) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *', [firstname, lastname, othername, email, phonenumber, passporturl, password, isadmin])
       .then((user) => {
         if (user.rowCount > 0) {
-          const token = encrypt.createToken(user.rows[0].email);
+          const data = {
+            email: user.rows[0].email,
+            isadmin: user.rows[0].isadmin,
+          };
+          
+          const token = encrypt.createToken(data);
           res.status(201).json({
             status: 201,
-            data: user.rows,
-            token,
+            data: [
+              {
+                token,
+                firstname: user.rows[0].firstname,
+                lastname: user.rows[0].lastname,
+                email: user.rows[0].email,
+                othername: user.rows[0].othername,
+                phonenumber: user.rows[0].phonenumber,
+                passporturl: user.rows[0].passporturl,
+              },
+            ],
           });
         } else {
           res.status(400).json({
@@ -101,8 +120,8 @@ class UserController {
       })
       .catch((err) => {
         if (err.message.includes('unique')) {
-          res.status(400).json({
-            status: 400,
+          res.status(500).json({
+            status: 500,
             error: 'User with that email already exist',
           });
         }
