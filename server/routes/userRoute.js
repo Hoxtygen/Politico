@@ -5,7 +5,7 @@ import UserController from '../controllers/userController';
 
 const usersRouter = Router();
 
-usersRouter.get('/users',/*  verify.verifyToken, */ UserController.getAllUsers);
+usersRouter.get('/users', verify.verifyAdmin, UserController.getAllUsers);
 usersRouter.post('/signup', UserController.addNewUser);
 usersRouter.post('/login', UserController.login);
 

@@ -1,4 +1,2 @@
-\c politico
-INSERT INTO politico_andela.Users (firstName, lastName, otherName, email, phoneNumber, passportUrl, isAdmin, password) VALUES ('Wasiu', 'Idowu', 'Adeniyi', 'shaolindragon22@gmail.com', '08060184972', 'https://www.wasiupassport.com', 'true', 'clusters1988');
-
-
+DELETE FROM politico_andela.users  WHERE id = 1;
+DELETE FROM politico_andela.users  WHERE id = 2;

@@ -68,7 +68,7 @@ class UserController {
 
   static addNewUser(req, res) {
     let {
-      firstname, lastname, othername, email, phonenumber, passporturl, password, isadmin
+      firstname, lastname, othername, email, phonenumber, passporturl, password,
     } = req.body;
     const errors = validations.validateNewUser(req.body);
     if (errors.error) {
@@ -86,9 +86,8 @@ class UserController {
       phonenumber,
       passporturl,
       password,
-      isadmin,
     };
-    dbConfig.query('INSERT INTO politico_andela.users (firstname, lastname, othername, email, phonenumber, passporturl, password, isadmin) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *', [firstname, lastname, othername, email, phonenumber, passporturl, password, isadmin])
+    dbConfig.query('INSERT INTO politico_andela.users (firstname, lastname, othername, email, phonenumber, passporturl, password) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *', [firstname, lastname, othername, email, phonenumber, passporturl, password])
       .then((user) => {
         if (user.rowCount > 0) {
           const data = {
