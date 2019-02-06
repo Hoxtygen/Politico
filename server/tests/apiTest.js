@@ -183,28 +183,9 @@ describe('Political Party', () => {
       .end((err, res) => {
         res.should.have.status(201);
         res.body.should.be.a('object');
-        /* res.body.data.should.have.a.property('name');
-        res.body.data.should.have.a.property('Acronym');
-        res.body.data.should.have.a.property('hqAddress');
-        res.body.data.should.have.a.property('logoUrl'); */
         done();
       });
   });
-
-  /*  it('Given an Id, this route should edit the party information', (done) => {
-    const newPartyName = {
-      name: 'National People Party',
-
-    };
-    chai.request(app)
-      .patch('/api/v1/parties/1/name')
-      .send(newPartyName)
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.body.should.be.a('object');
-        done();
-      });
-  }); */
 });
 
 describe('Candidate Registration', () => {
@@ -222,21 +203,3 @@ describe('Candidate Registration', () => {
   });
 });
 
-describe('Voting', () => {
-  it('should vote for  a candidate', (done) => {
-    const vote = {
-      office: 2,
-      voter: 1,
-      candidate: 1,
-    };
-    chai.request(app)
-      .post('/api/v1/votes')
-      .send(vote)
-      .set('api-access-token', token)
-      .end((err, res) => {
-        res.should.have.status(201);
-        res.body.should.be.a('object');
-        done();
-      });
-  });
-});
