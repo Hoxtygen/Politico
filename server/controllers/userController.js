@@ -24,7 +24,7 @@ class UserController {
     }
     dbConfig.query('SELECT * FROM politico_andela.users WHERE email = $1', [email])
       .then((user) => {
-        console.log(user.rows);
+        console.log(user.rows, email);
         if (!user.rows[0]) {
           return res.status(401).json({
             status: 401,
@@ -35,7 +35,7 @@ class UserController {
         if (!encrypt.compare(user.rows[0].password, password)) {
           return res.status(400).json({
             status: 400,
-            error: 'Invalid username or password',
+            error: 'Invalid email or password',
           });
         }
         const data = {
@@ -79,6 +79,7 @@ class UserController {
       });
     }
     password = encrypt.encryptPwd(password);
+    console.log(password)
     const newUser = {
       firstname,
       lastname,

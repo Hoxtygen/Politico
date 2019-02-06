@@ -1,6 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../server';
+import seed from '../../adminSeed';
 
 
 chai.use(chaiHttp);
@@ -17,6 +18,7 @@ const newUser = {
   passporturl: 'https://www.orisjonapassport.com',
   password: 'shaolindragon',
 };
+
 
 describe('Users', () => {
   it('should register a new user', (done) => {
@@ -48,14 +50,14 @@ describe('Users', () => {
 
   it('should login an Admin', (done) => {
     const userAdmin = {
-      email: 'udub-it@hotmail.com',
+      email: 'hoxtygen@live.com',
       password: 'clusters1988',
     };
     chai.request(app)
       .post('/api/v1/auth/login')
       .send(userAdmin)
       .end((err, res) => {
-        console.log(res)
+        adminToken = res.body.data[0].token;
         res.should.have.status(200);
         res.body.should.be.a('object');
         done();
@@ -71,7 +73,7 @@ describe('Create a political office', () => {
     };
     chai.request(app)
       .post('/api/v1/offices')
-      .set('api-access-token', token)
+      .set('api-access-token', adminToken)
       .send(newOffice)
       .end((err, res) => {
         res.should.have.status(201);
@@ -87,7 +89,7 @@ describe('Create a political office', () => {
     const id = 3;
     chai.request(app)
       .get(`/api/v1/offices/${id}`)
-      .set('api-access-token', token)
+      .set('api-access-token', adminToken)
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
@@ -148,7 +150,7 @@ describe('Political Party', () => {
     const id = 4;
     chai.request(app)
       .delete(`/api/v1/parties/${id}`)
-      .set('api-access-token', token)
+      .set('api-access-token', adminToken)
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
@@ -160,6 +162,7 @@ describe('Political Party', () => {
     const id = 300;
     chai.request(app)
       .delete(`/api/v1/parties/${id}`)
+      .set('api-access-token', adminToken)
       .end((err, res) => {
         res.should.have.status(404);
         done();
@@ -176,9 +179,8 @@ describe('Political Party', () => {
     chai.request(app)
       .post('/api/v1/parties')
       .send(newParty)
-      .set('api-access-token', token)
+      .set('api-access-token', adminToken)
       .end((err, res) => {
-        // console.log(res);
         res.should.have.status(201);
         res.body.should.be.a('object');
         /* res.body.data.should.have.a.property('name');
@@ -198,7 +200,6 @@ describe('Political Party', () => {
       .patch('/api/v1/parties/1/name')
       .send(newPartyName)
       .end((err, res) => {
-        //console.log(res);
         res.should.have.status(200);
         res.body.should.be.a('object');
         done();
@@ -212,7 +213,7 @@ describe('Candidate Registration', () => {
     chai.request(app)
       .post('/api/v1/office/1/register')
       .send({ office: 2 })
-      .set('api-access-token', token)
+      .set('api-access-token', adminToken)
       .end((err, res) => {
         res.should.have.status(201);
         res.body.should.be.a('object');
@@ -231,6 +232,7 @@ describe('Voting', () => {
     chai.request(app)
       .post('/api/v1/votes')
       .send(vote)
+      .set('api-access-token', token)
       .end((err, res) => {
         res.should.have.status(201);
         res.body.should.be.a('object');

@@ -1,5 +1,5 @@
 \c politico_test
-CREATE SCHEMA politico_andela;
+CREATE SCHEMA IF NOT EXISTS  politico_andela;
 
 
 DROP TABLE IF EXISTS politico_andela.users CASCADE; 
@@ -35,9 +35,9 @@ CREATE TABLE IF NOT EXISTS politico_andela.parties (
 );
 
  CREATE TABLE IF NOT EXISTS politico_andela.candidates (
-    id SERIAL  NOT NULL,
-    office INTEGER REFERENCES politico_andela.offices(id) NOT NULL,
-    candidate INTEGER REFERENCES politico_andela.users(id) NOT NULL,
+    id SERIAL NOT NULL,
+    office INTEGER NOT NULL,
+    candidate INTEGER NOT NULL,
     FOREIGN KEY(office) REFERENCES politico_andela.offices(id),
     FOREIGN KEY(candidate) REFERENCES politico_andela.users(id),
     PRIMARY KEY (office, candidate)
@@ -47,17 +47,18 @@ CREATE TABLE IF NOT EXISTS politico_andela.parties (
 CREATE TABLE IF NOT EXISTS politico_andela.votes (
     id SERIAL NOT NULL,
     createdOn DATE NOT NULL DEFAULT CURRENT_DATE,
-    voter INT REFERENCES politico_andela.users(id) NOT NULL,
-    office INTEGER REFERENCES politico_andela.offices(id) NOT NULL,
-    candidate INTEGER REFERENCES politico_andela.candidates(id) NOT NULL,
+    voter INT NOT NULL,
+    office INTEGER NOT NULL,
+    candidate INTEGER NOT NULL,
     FOREIGN key(voter) REFERENCES politico_andela.users(id),
+    FOREIGN key(office) REFERENCES politico_andela.offices(id),
     FOREIGN KEY(candidate) REFERENCES politico_andela.candidates(id),
     PRIMARY KEY (office, voter)
 );
 
 
 
-INSERT INTO politico_andela.Users (firstName, lastName, otherName, email, phoneNumber, passportUrl, isAdmin, password) VALUES ('Wasiu', 'Idowu', 'Oriyomi', 'hoxtygen@live.com', '08060184972', 'https://www.mypassport.com', 'true', 'shaolindragon');
+INSERT INTO politico_andela.Users (firstName, lastName, otherName, email, phoneNumber, passportUrl, isAdmin, password) VALUES ('Wasiu', 'Idowu', 'Oriyomi', 'hoxtygen@live.com', '08060184972', 'https://www.mypassport.com', 'true', '$2a$14$VqsJox4S6rnvStjNMyuujeJRo4xI2vC7H6AOOxULOPNQ2DpzYEQ1q');
 INSERT INTO politico_andela.Users (firstName, lastName, otherName, email, phoneNumber, passportUrl, password) VALUES ('Wasiu', 'Idowu', 'Oriyomi', 'hoxtygen01@live.com', '08060184972', 'https://www.mypassport1.com', '2a$14$phZP9Luv78eE3Tu1sf2wd.f5FNc9OHod3WqZIdCiUQIVqPm.PWlDm');
 INSERT INTO politico_andela.Users (firstName, lastName, otherName, email, phoneNumber, passportUrl, password) VALUES ('Wasiu', 'Idowu', 'Oriyomi', 'hoxtygen02@live.com', '08060184972', 'https://www.mypassport2.com', '2a$14$phZP9Luv78eE3Tu1sf2wd.f5FNc9OHod3WqZIdCiUQIVqPm.PWlDm');
 INSERT INTO politico_andela.Users (firstName, lastName, otherName, email, phoneNumber, passportUrl, password) VALUES ('Wasiu', 'Idowu', 'Oriyomi', 'hoxtygen03@live.com', '08060184972', 'https://www.mypassport3.com',  '2a$14$phZP9Luv78eE3Tu1sf2wd.f5FNc9OHod3WqZIdCiUQIVqPm.PWlDm');

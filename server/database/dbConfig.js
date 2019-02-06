@@ -10,7 +10,7 @@ const connectionString = NODE_ENV === 'test' ? DATABASE_URL_TEST : DATABASE_URL;
 const pool = new Pool({
   connectionString,
 });
-
+console.log(connectionString);
 pool.connect((err) => {
   if (err) {
     return console.log('Unable to access the database');
