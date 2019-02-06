@@ -24,6 +24,7 @@ class UserController {
     }
     dbConfig.query('SELECT * FROM politico_andela.users WHERE email = $1', [email])
       .then((user) => {
+        console.log(user.rows);
         if (!user.rows[0]) {
           return res.status(401).json({
             status: 401,

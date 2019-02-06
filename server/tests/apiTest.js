@@ -7,6 +7,7 @@ chai.use(chaiHttp);
 chai.should();
 
 let token;
+let adminToken;
 const newUser = {
   firstname: 'Oriyomi',
   lastname: 'jonatan',
@@ -17,7 +18,7 @@ const newUser = {
   password: 'shaolindragon',
 };
 
-describe('signup', () => {
+describe('Users', () => {
   it('should register a new user', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
@@ -39,6 +40,22 @@ describe('signup', () => {
       .send(user)
       .end((err, res) => {
         token = res.body.data[0].token;
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        done();
+      });
+  });
+
+  it('should login an Admin', (done) => {
+    const userAdmin = {
+      email: 'udub-it@hotmail.com',
+      password: 'clusters1988',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(userAdmin)
+      .end((err, res) => {
+        console.log(res)
         res.should.have.status(200);
         res.body.should.be.a('object');
         done();
