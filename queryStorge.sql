@@ -104,3 +104,23 @@ INSERT INTO politico_andela.votes (office, voter, candidate) VALUES (2, 1);
 
 alter column 
 alter table users alter column email drop not null;
+
+
+CREATE TABLE IF NOT EXISTS politico_andela.candidates (
+    id SERIAL PRIMARY KEY NOT NULL,
+    office INTEGER REFERENCES politico_andela.offices(id) NOT NULL,
+    candidate INTEGER REFERENCES politico_andela.users(id) NOT NULL,
+    FOREIGN KEY(office) REFERENCES politico_andela.offices(id),
+    FOREIGN KEY(candidate) REFERENCES politico_andela.users(id)
+);
+
+CREATE TABLE IF NOT EXISTS politico_andela.votes (
+    id SERIAL NOT NULL,
+    createdOn DATE NOT NULL DEFAULT CURRENT_DATE,
+    voter INTEGER REFERENCES politico_andela.users(id) NOT NULL,
+    office INTEGER REFERENCES politico_andela.offices(id) NOT NULL,
+    candidate INTEGER REFERENCES politico_andela.candidates(id) NOT NULL,
+    FOREIGN key(voter) REFERENCES politico_andela.users(id),
+    FOREIGN KEY(candidate) REFERENCES politico_andela.candidates(id),
+    PRIMARY KEY (office, voter)
+);
