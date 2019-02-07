@@ -1,12 +1,14 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../server';
+import seed from '../../adminSeed';
 
 
 chai.use(chaiHttp);
 chai.should();
 
 let token;
+let adminToken;
 const newUser = {
   firstname: 'Oriyomi',
   lastname: 'jonatan',
@@ -17,7 +19,8 @@ const newUser = {
   password: 'shaolindragon',
 };
 
-describe('signup', () => {
+
+describe('Users', () => {
   it('should register a new user', (done) => {
     chai.request(app)
       .post('/api/v1/auth/signup')
@@ -44,6 +47,22 @@ describe('signup', () => {
         done();
       });
   });
+
+  it('should login an Admin', (done) => {
+    const userAdmin = {
+      email: 'hoxtygen@live.com',
+      password: 'clusters1988',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(userAdmin)
+      .end((err, res) => {
+        adminToken = res.body.data[0].token;
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        done();
+      });
+  });
 });
 
 describe('Create a political office', () => {
@@ -54,7 +73,7 @@ describe('Create a political office', () => {
     };
     chai.request(app)
       .post('/api/v1/offices')
-      .set('api-access-token', token)
+      .set('api-access-token', adminToken)
       .send(newOffice)
       .end((err, res) => {
         res.should.have.status(201);
@@ -70,7 +89,7 @@ describe('Create a political office', () => {
     const id = 3;
     chai.request(app)
       .get(`/api/v1/offices/${id}`)
-      .set('api-access-token', token)
+      .set('api-access-token', adminToken)
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
@@ -131,7 +150,7 @@ describe('Political Party', () => {
     const id = 4;
     chai.request(app)
       .delete(`/api/v1/parties/${id}`)
-      .set('api-access-token', token)
+      .set('api-access-token', adminToken)
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
@@ -143,6 +162,7 @@ describe('Political Party', () => {
     const id = 300;
     chai.request(app)
       .delete(`/api/v1/parties/${id}`)
+      .set('api-access-token', adminToken)
       .end((err, res) => {
         res.should.have.status(404);
         done();
@@ -159,34 +179,13 @@ describe('Political Party', () => {
     chai.request(app)
       .post('/api/v1/parties')
       .send(newParty)
-      .set('api-access-token', token)
+      .set('api-access-token', adminToken)
       .end((err, res) => {
-        // console.log(res);
         res.should.have.status(201);
         res.body.should.be.a('object');
-        /* res.body.data.should.have.a.property('name');
-        res.body.data.should.have.a.property('Acronym');
-        res.body.data.should.have.a.property('hqAddress');
-        res.body.data.should.have.a.property('logoUrl'); */
         done();
       });
   });
-
-  /*  it('Given an Id, this route should edit the party information', (done) => {
-    const newPartyName = {
-      name: 'National People Party',
-
-    };
-    chai.request(app)
-      .patch('/api/v1/parties/1/name')
-      .send(newPartyName)
-      .end((err, res) => {
-        //console.log(res);
-        res.should.have.status(200);
-        res.body.should.be.a('object');
-        done();
-      });
-  }); */
 });
 
 describe('Candidate Registration', () => {
@@ -195,7 +194,7 @@ describe('Candidate Registration', () => {
     chai.request(app)
       .post('/api/v1/office/1/register')
       .send({ office: 2 })
-      .set('api-access-token', token)
+      .set('api-access-token', adminToken)
       .end((err, res) => {
         res.should.have.status(201);
         res.body.should.be.a('object');
@@ -204,20 +203,3 @@ describe('Candidate Registration', () => {
   });
 });
 
-describe('Voting', () => {
-  it('should vote for  a candidate', (done) => {
-    const vote = {
-      office: 2,
-      voter: 1,
-      candidate: 1,
-    };
-    chai.request(app)
-      .post('/api/v1/votes')
-      .send(vote)
-      .end((err, res) => {
-        res.should.have.status(201);
-        res.body.should.be.a('object');
-        done();
-      });
-  });
-});

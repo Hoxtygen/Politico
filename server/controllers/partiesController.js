@@ -6,10 +6,19 @@ import Parties from '../database/partyData';
 class PartyController {
   static getAllParties(req, res) {
     dbConfig.query('SELECT * FROM politico_andela.parties')
-      .then(parties => res.status(200).json({
-        status: 200,
-        data: parties.rows,
-      }))
+      .then((parties) => {
+        if (parties.rows.length === 0) {
+          return res.status(204).json({
+            status: 204,
+            error: 'Database Empty',
+            data: parties.rows,
+          });
+        }
+        return res.status(200).json({
+          status: 200,
+          data: parties.rows,
+        });
+      })
       .catch((err) => {
         if (err) {
           return res.status(500).json({
@@ -21,7 +30,13 @@ class PartyController {
   }
 
   static getOneParty(req, res) {
-    const { id } = req.params;
+    const id = parseInt(req.params.id, 10);
+    if (typeof id !== 'number') {
+      return res.status(400).json({
+        status: 400,
+        error: 'Invalid value type supplied',
+      });
+    }
     dbConfig.query(`SELECT * FROM politico_andela.parties WHERE id = ${id}`)
       .then((party) => {
         if (party.rowCount > 0) {

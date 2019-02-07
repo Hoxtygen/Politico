@@ -5,11 +5,11 @@ const validateLogin = (login) => {
     email: Joi.string().email({ minDomainAtoms: 2 }).required(),
     password: Joi.required(),
   };
-  return Joi.validate(login, schema);
+  return Joi.validate(login, schema, { abortEarly: false });
 };
 
 const validateNewUser = (newUser) => {
-  const schema = {
+  const schema = Joi.object().keys({
     firstname: Joi.string().required(),
     lastname: Joi.string().required(),
     othername: Joi.string().required(),
@@ -18,8 +18,8 @@ const validateNewUser = (newUser) => {
     passporturl: Joi.required(),
     password: Joi.required(),
     isadmin: Joi.boolean(),
-  };
-  return Joi.validate(newUser, schema);
+  });
+  return Joi.validate(newUser, schema, { abortEarly: false });
 };
 
 const validateNewOffice = (newOffice) => {
@@ -27,14 +27,14 @@ const validateNewOffice = (newOffice) => {
     name: Joi.string().required(),
     type: Joi.string().required(),
   };
-  return Joi.validate(newOffice, schema);
+  return Joi.validate(newOffice, schema, { abortEarly: false });
 };
 
 const validateGetOneOffice = (oneOffice) => {
   const schema = {
-    id: Joi.number().required(),
+    id: Joi.number().integer().required(),
   };
-  return Joi.validate(oneOffice, schema);
+  return Joi.validate(oneOffice, schema, { abortEarly: false });
 };
 
 const validateNewParty = (newParty) => {
@@ -44,7 +44,7 @@ const validateNewParty = (newParty) => {
     hqAddress: Joi.string().required(),
     logoUrl: Joi.string().required(),
   };
-  return Joi.validate(newParty, schema);
+  return Joi.validate(newParty, schema, { abortEarly: false });
 };
 
 const validateVotes = (votes) => {
@@ -53,7 +53,7 @@ const validateVotes = (votes) => {
     candidate: Joi.required(),
     voter: Joi.required(),
   };
-  return Joi.validate(votes, schema);
+  return Joi.validate(votes, schema, { abortEarly: false });
 };
 
 const validateCandidateRegistration = (candidate) => {
@@ -61,14 +61,14 @@ const validateCandidateRegistration = (candidate) => {
     candidate: Joi.number().integer().required(),
     office: Joi.number().integer().required(),
   };
-  return Joi.validate(candidate, schema);
+  return Joi.validate(candidate, schema, { abortEarly: false });
 };
 
 const validateResult = (office) => {
   const schema = {
     office: Joi.number().required(),
   };
-  return Joi.validate(office, schema);
+  return Joi.validate(office, schema, { abortEarly: false });
 };
 
 const validateEditParty = (id, name) => {
@@ -80,7 +80,7 @@ const validateEditParty = (id, name) => {
     id: Joi.number().integer().required(),
     name: Joi.string().required(),
   };
-  return Joi.validate(partyInfo, schema);
+  return Joi.validate(partyInfo, schema, { abortEarly: false });
 };
 
 

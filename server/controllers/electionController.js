@@ -38,13 +38,6 @@ class RegisterCandidate {
 
   static getResult(req, res) {
     const office = parseInt(req.params.id, 10);
-    /* const errors = validations.validateResult(office);
-    if (errors.error) {
-      return res.status(400).json({
-        status: 400,
-        error: errors.error.details[0].message,
-      });
-    } */
     dbConfig.query('SELECT candidate, office, count (candidate) AS result FROM politico_andela.votes where office = $1 GROUP BY office, candidate', [office])
       .then((result) => {
         if (result.rowCount > 0) {
@@ -53,8 +46,8 @@ class RegisterCandidate {
             data: result.rows,
           });
         }
-        return res.status(400).json({
-          status: 400,
+        return res.status(404).json({
+          status: 404,
           error: 'No result found for the given office',
         });
       })
