@@ -1,5 +1,5 @@
 \c politico_test
-CREATE SCHEMA IF NOT EXISTS  politico_andela;
+CREATE SCHEMA  politico_andela;
 
 
 DROP TABLE IF EXISTS politico_andela.users CASCADE; 
