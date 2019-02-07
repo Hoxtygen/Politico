@@ -24,7 +24,6 @@ class UserController {
     }
     dbConfig.query('SELECT * FROM politico_andela.users WHERE email = $1', [email])
       .then((user) => {
-        console.log(user.rows, email);
         if (!user.rows[0]) {
           return res.status(401).json({
             status: 401,
@@ -48,12 +47,15 @@ class UserController {
           data: [
             {
               token,
-              firstname: user.rows[0].firstname,
-              lastname: user.rows[0].lastname,
-              email: user.rows[0].email,
-              othername: user.rows[0].othername,
-              phonenumber: user.rows[0].phonenumber,
-              passporturl: user.rows[0].passporturl,
+              user: {
+                firstname: user.rows[0].firstname,
+                lastname: user.rows[0].lastname,
+                email: user.rows[0].email,
+                othername: user.rows[0].othername,
+                phonenumber: user.rows[0].phonenumber,
+                passporturl: user.rows[0].passporturl,
+                isadmin: user.rows[0].isadmin,
+              },
             },
           ],
         });
@@ -79,7 +81,6 @@ class UserController {
       });
     }
     password = encrypt.encryptPwd(password);
-    console.log(password)
     const newUser = {
       firstname,
       lastname,
@@ -96,19 +97,21 @@ class UserController {
             email: user.rows[0].email,
             isadmin: user.rows[0].isadmin,
           };
-          
+
           const token = encrypt.createToken(data);
           res.status(201).json({
             status: 201,
             data: [
               {
                 token,
-                firstname: user.rows[0].firstname,
-                lastname: user.rows[0].lastname,
-                email: user.rows[0].email,
-                othername: user.rows[0].othername,
-                phonenumber: user.rows[0].phonenumber,
-                passporturl: user.rows[0].passporturl,
+                user: {
+                  firstname: user.rows[0].firstname,
+                  lastname: user.rows[0].lastname,
+                  email: user.rows[0].email,
+                  othername: user.rows[0].othername,
+                  phonenumber: user.rows[0].phonenumber,
+                  passporturl: user.rows[0].passporturl,
+                },
               },
             ],
           });

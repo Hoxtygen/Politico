@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	    <link rel="stylesheet" href="./assets/css/style.css">
+	<title>Welcome Back</title>
+</head>
+<body>
+	<header class="default-header">
+		<div class="sticky-header">
+			<div class="container">
+				<nav class="navbar">
+	                <label for="check-toggle" class="toggleNavbar" id = "toggleNavbar">
+	                    <i class="fa fa-bars"></i>
+	                </label>
+                	<a href="index.html" class="dlogo">Politico</a>
+                	<input type="checkbox" id="check-toggle"></input>
+                	<ul class="navbar-nav" id = "mainNav">
+	                    <li><a class="nav-item" href="signup.html">Register</a></li>
+                	</ul>
+            </nav>
+			</div>
+		</div>
+	</header>
+
+	<main>
+		<section id = "form-wrapper">
+            <div class="container">
+                <div class="row jcc aic">
+                    <div class="col-6 mx tc">
+                        <div class="mb-10">
+                            <h3>Welcome Back</h3>
+                        </div>
+                        <div class="form-container">
+                            <form action="" id="loginForm" class="form mb-10" method="POST">
+                                <div class="single-input mb-10">
+                                    <input type="email" name="email" id = "email" placeholder="Email Address" onfocus="this.placeholder=''" onblur="this.placeholder ='Email Address'">
+                                </div>
+                                <div class="single-input mb-10">
+                                    <input type="password" name="password" id = "password" placeholder="Your Password" onblur="this.placeholder='Your Password'" onfocus="this.placeholder=''">
+                                </div>
+                                <a href="passReset.html">Forgot password?</a>
+                                <div class="d-flex jcc">
+                                    <input type="submit" class="mt-10 aic btn btn-primary text-uppercase" value="Login">
+                                </div>
+                            </form>
+                            <p>Don't have an account?</p>
+                            <a href="signup.html">Create an account</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    	</section>
+    </main>
+    
+    <script src="assets/js/login.js"></script>
+</body>
+</html>

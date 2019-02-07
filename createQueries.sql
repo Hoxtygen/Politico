@@ -1,14 +1,9 @@
+\c politico
 
-
-ALTER TABLE politico_andela.candidates ADD UNIQUE (candidate);
-
-CREATE TABLE IF NOT EXISTS politico_andela.votes (
+CREATE TABLE IF NOT EXISTS politico_andela.candidates (
     id SERIAL NOT NULL,
-    createdOn DATE NOT NULL DEFAULT CURRENT_DATE,
-    voter INTEGER REFERENCES politico_andela.users(id) NOT NULL,
-    office INTEGER REFERENCES politico_andela.offices(id) NOT NULL,
-    candidate INTEGER REFERENCES politico_andela.candidates(id) NOT NULL,
-    FOREIGN key(voter) REFERENCES politico_andela.users(id),
-    FOREIGN KEY(candidate) REFERENCES politico_andela.candidates(id),
-    PRIMARY KEY (office, voter)
+    office INTEGER REFERENCES politico_andela.contestants(office) NOT NULL,
+    party INTEGER REFERENCES politico_andela.contestants(party) NOT NULL,
+    candidate INTEGER REFERENCES politico_andela.contestants(contestant) NOT NULL,
+    PRIMARY KEY (office, candidate)
 );
