@@ -8,8 +8,8 @@ const verify = {
   verifyLoggedIn(req, res, next) {
     const token = req.headers['api-access-token'];
     if (!token) {
-      res.status(400).json({
-        status: 400,
+      res.status(401).json({
+        status: 401,
         message: 'Access denied, you must be logged in to access this resource',
       });
     } else {
