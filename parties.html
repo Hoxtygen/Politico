@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Users dashboard</title>
+    <title>Admin dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/test2.css" />
 </head>
@@ -44,68 +44,26 @@
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Peoples Democratic Party</td>
-                                                <td><Acronym>PDP</Acronym></td>
-                                                <td><img src="./assets/img/pdp.png" alt="PDP logo" style="height: 50px; width: 50px"></td>
-                                                <td>Wadata Plaza, Michael Okpara Way, Zone 5, Wuse, Abuja</td>
-                                                <td>
-                                                    <a href="partyEdit.html" class="edit actn">Edit</a>
-                                                    <button class="actn delete" type="submit">Delete</button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>2</td>
-                                            <td>Labour Party</td>
-                                            <td><Acronym>LP</Acronym></td>
-                                            <td><img src="./assets/img/LP.jpg" alt="PDP logo" style="height: 50px; width: 50px"></td>
-                                            <td> Dabo Shopping Mall, 2nd Floor, Plot 73 Ladoke Akintola Boulevard, Garki, Abuja</td>
-                                            <td>
-                                                <a href="partyEdit.html" class="edit actn">Edit</a>
-                                                <button class="actn delete" type="submit">Delete</button>
-                                            </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>3</td>
-                                            <td>Democratic Peoples Party</td>
-                                            <td><Acronym>DPP</Acronym></td>
-                                            <td><img src="./assets/img/dpp.jpg" alt="DPP logo" style="height: 50px; width: 50px"></td>
-                                            <td>No. 1 Nouakchott Street Zone 1, Wuse, Abuja</td>
-                                            <td>
-                                                <a href="partyEdit.html" class="edit actn">Edit</a>
-                                                <button class="actn delete" type="submit">Delete</button>
-                                            </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Progressive Peoples Alliance</td>
-                                                <td><Acronym>PPA</Acronym></td>
-                                                <td><img src="./assets/img/ppa.gif" alt="PPA logo" style="height: 50px; width: 50px"></td>
-                                                <td>Warri Street, off Emeka Anyoku Street, Area 11, Garki, Abuja</td>
-                                                <td>
-                                                    <a href="partyEdit.html" class="edit actn">Edit</a>
-                                                    <button class="actn delete" type="submit">Delete</button>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>5</td>
-                                                <td>All Peoples Congress</td>
-                                                <td><Acronym>APC</Acronym></td>
-                                                <td><img src="./assets/img/apc.png" alt="APC logo" style="height: 50px; width: 50px"></td>
-                                                <td>40 Blantyre Street, Wuse II; Abuja, Nigeria</td>
-                                                <td>
-                                                    <a href="partyEdit.html" class="edit actn">Edit</a>
-                                                    <button class="actn delete" type="submit">Delete</button>
-                                                </td>
-                                            </tr>     
+                                        <tbody id = "party-body">
+                                              
                                         </tbody>                                   
                                     </table>
+                                </div>
+                                <div id="simpleModal" class="modal">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <span class="closeBtn">&times;</span>
+                                            <h2>Confirmation message</h2>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Are you sure you want to delete this political party?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn" id="confirm">Delete</button>
+                                            <button type="button" class="btn" id="dismiss">Cancel</button>
+                    
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div><!-- container closed-->
@@ -119,12 +77,12 @@
             <li><a class="side" href="politicalOffice.html">Political Office</a></li>
             <li><a href="contestants.html">Contestants</a></li>
             <li><a href="electionResult.html">Results</a></li>
-            <li><a href="vote.html">Vote</a></li>
             <li><a href="index.html">Logout</a></li>
         </ul>
       </nav>
 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="./assets/js/main.js"></script>
+      <script src="assets/js/getParties.js"></script>
         </body>
 </html>

@@ -143,6 +143,16 @@ ol, ul    {
     min-height: 100vh;
 }
 
+.winner   {
+  color: #fff;
+  background: forestgreen;
+  text-align: center;
+}
+
+table li  {
+  text-align: center;
+}
+
 .content {
   height: calc(100vh - 50px);
   width: 100%;
@@ -720,8 +730,8 @@ input[type="checkbox"] {
 }
 
 .section-header     {
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding-top: 26px;
+  padding-bottom: 26px;
 }
 
 .delete   {
@@ -748,5 +758,60 @@ input[type="checkbox"] {
   font-size: 0.9rem;
 }
 
+.modal  {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+
+.modal-content      {
+  background-color: #f4f4f4;
+  margin: 20% auto;
+  width: 30%;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+  animation-name: modalOpen;
+  animation-duration: 1s;
+}
+
+.modal-header       {
+  background:#222;
+  padding: 15px;
+  color: #fff
+}
+
+.modal-body         {
+  padding: 10px 20px;
+}
+
+.modal-header h2, .modal-footer h3        {
+  margin: 0;
+}
+
+.modal-footer       {
+  background: #222;
+  padding: 10px;
+  color: #fff;
+  text-align: center;
+
+}
+
+.closeBtn   {
+  float: right;
+  color: #fff;
+  font-size: 30px
+}
+
+.closeBtn:hover, .closeBtn:focus    {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
 
 
