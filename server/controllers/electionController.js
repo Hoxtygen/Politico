@@ -3,17 +3,23 @@ import validations from '../helper/validateLogin';
 
 class RegisterCandidate {
   static register(req, res) {
-    const candidate = req.params.id;
+    const candidate = parseInt(req.params.id, 10);
     const { office, party } = req.body;
     const params = { candidate, office };
     console.log(req.body)
-    const errors = validations.validateCandidateRegistration(params);
+    //const errors = validations.validateCandidateRegistration(params);
    /*  if (errors.error) {
       return res.status(400).json({
         status: 400,
         error: errors.error.details[0].message,
       });
     } */
+    if (isNaN(office) || isNaN(party || isNaN(candidate))) {
+      return res.status(400).json({
+        status: 400,
+        error: 'You entered a non-numeric character in your request',
+      })
+    }
     dbConfig.query('INSERT INTO politico_andela.candidates (office, party, candidate) VALUES ($1, $2, $3) RETURNING *', [office, party, candidate])
       .then((politician) => {
         if (politician.rowCount > 0) {

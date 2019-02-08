@@ -64,3 +64,30 @@ for (var i = 0, row; row = tablebody.rows[i]; i++) {
     col.setAttribute("data-th", headertext[j]);
   } 
 }
+
+
+
+
+document.body.addEventListener('click', alert);
+function alert(e) {
+  const modal = document.getElementById('simpleModal');
+  [].forEach.call(document.querySelectorAll('.delete'), (item) => {
+    if (e.target === item) {
+      openModal();
+    }
+  });
+
+  function openModal() {
+    modal.style.display = 'block';
+  }
+}
+
+//  Function to close modal
+function closeModal() {
+  modal.style.display = 'none';
+}
+const dismiss = document.getElementById('dismiss');
+let modal = document.getElementById('simpleModal');
+const closeBtn = document.getElementsByClassName('closeBtn')[0];
+closeBtn.addEventListener('click', closeModal);
+dismiss.addEventListener('click', closeModal);
