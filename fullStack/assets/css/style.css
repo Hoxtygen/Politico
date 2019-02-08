@@ -453,6 +453,12 @@ footer li a     {
 }
 
 
+a.logSign    {
+  color: #fff;
+  text-decoration: underline;
+  font-size: 15px;
+}
+
 /* media query for page responsiveness */
  @media (min-width: 576px) {
     .container {

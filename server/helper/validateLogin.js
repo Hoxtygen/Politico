@@ -27,7 +27,11 @@ const validateNewOffice = (newOffice) => {
     name: Joi.string().required(),
     type: Joi.string().required(),
   };
-  return Joi.validate(newOffice, schema, { abortEarly: false });
+  const failAction = (request, h, err) => {
+    throw err;
+    return;
+}
+  return Joi.validate(newOffice, schema, failAction);
 };
 
 const validateGetOneOffice = (oneOffice) => {
@@ -60,6 +64,7 @@ const validateCandidateRegistration = (candidate) => {
   const schema = {
     candidate: Joi.number().integer().required(),
     office: Joi.number().integer().required(),
+    party: Joi.number().integer().required(),
   };
   return Joi.validate(candidate, schema, { abortEarly: false });
 };

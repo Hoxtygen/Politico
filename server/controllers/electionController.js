@@ -4,16 +4,17 @@ import validations from '../helper/validateLogin';
 class RegisterCandidate {
   static register(req, res) {
     const candidate = req.params.id;
-    const { office } = req.body;
+    const { office, party } = req.body;
     const params = { candidate, office };
+    console.log(req.body)
     const errors = validations.validateCandidateRegistration(params);
-    if (errors.error) {
+   /*  if (errors.error) {
       return res.status(400).json({
         status: 400,
         error: errors.error.details[0].message,
       });
-    }
-    dbConfig.query('INSERT INTO politico_andela.candidates (office, candidate) VALUES ($1, $2) RETURNING *', [office, candidate])
+    } */
+    dbConfig.query('INSERT INTO politico_andela.candidates (office, party, candidate) VALUES ($1, $2, $3) RETURNING *', [office, party, candidate])
       .then((politician) => {
         if (politician.rowCount > 0) {
           return res.status(201).json({

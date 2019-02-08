@@ -149,3 +149,31 @@ CREATE TABLE IF NOT EXISTS politico_andela.contestants (
     FOREIGN KEY(contestant) REFERENCES politico_andela.users(id),
     PRIMARY KEY (office, contestant)
 );
+
+
+candidates
+id SERIAL UNIQUE NOT NULL,
+      office INTEGER REFERENCES offices (id) ON DELETE CASCADE,
+      party INTEGER REFERENCES parties (id) ON DELETE CASCADE,
+      candidate INTEGER REFERENCES users (id) ON DELETE CASCADE,
+      PRIMARY KEY (office, candidate)
+
+        votes
+       id SERIAL UNIQUE NOT NULL,
+      created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      created_by INTEGER REFERENCES users (id) ON DELETE CASCADE,
+      office INTEGER REFERENCES offices (id) ON DELETE CASCADE,
+      candidate INTEGER REFERENCES candidates (id) ON DELETE CASCADE,
+      PRIMARY KEY (created_by, office)
+
+
+
+
+      CREATE TABLE IF NOT EXISTS politico_andela.votes (
+    id SERIAL NOT NULL,
+    createdOn DATE NOT NULL DEFAULT CURRENT_DATE,
+    voter INTEGER REFERENCES politico_andela.users(id) ON DELETE CASCADE,
+    office INTEGER REFERENCES politico_andela.offices(id) ON DELETE CASCADE,
+    candidate INTEGER REFERENCES politico_andela.candidates(candidate) ON DELETE CASCADE,
+    PRIMARY KEY (voter, office)
+);

@@ -1,16 +1,16 @@
-let token = localStorage.getItem('token');
+const token = localStorage.getItem('token');
 
 
 function getParties() {
-    fetch('http://localhost:5003/api/v1/parties', {
-      headers: {
-        'api-access-token': token,
-      },
-    })
-      .then(res => res.json())
-      .then((parsedData) => {
-        //console.log(parsedData)
-        const partyBody = document.getElementById('party-body').innerHTML = `
+  fetch('https://hoxtygen-politico.herokuapp.com/api/v1/parties', {
+    headers: {
+      'api-access-token': token,
+    },
+  })
+    .then(res => res.json())
+    .then((parsedData) => {
+      // console.log(parsedData)
+      const partyBody = document.getElementById('party-body').innerHTML = `
         ${parsedData.data.map(data => `
               <tr>
                   <td>${data.id}</td>
@@ -24,9 +24,9 @@ function getParties() {
                 </td>
               </tr>
         `)}
-        `
-      })
-      .catch(err => console.log(err));
-  }
-  
-  getParties();
+        `;
+    })
+    .catch(err => console.log(err));
+}
+
+getParties();

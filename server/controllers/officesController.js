@@ -30,10 +30,10 @@ class OfficesController {
 
   static getOneOffice(req, res) {
     const id = parseInt(req.params.id, 10);
-    if (typeof id !== 'number') {
+    if (isNaN(id)) {
       return res.status(400).json({
         status: 400,
-        error: 'Invalid value type supplied',
+        error: 'Id must be a number',
       });
     }
     dbConfig.query(`SELECT * FROM politico_andela.offices WHERE id = ${id}`)
