@@ -143,6 +143,16 @@ ol, ul    {
     min-height: 100vh;
 }
 
+.winner   {
+  color: #fff;
+  background: forestgreen;
+  text-align: center;
+}
+
+table li  {
+  text-align: center;
+}
+
 .content {
   height: calc(100vh - 50px);
   width: 100%;
@@ -720,8 +730,8 @@ input[type="checkbox"] {
 }
 
 .section-header     {
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding-top: 26px;
+  padding-bottom: 26px;
 }
 
 .delete   {
@@ -747,6 +757,7 @@ input[type="checkbox"] {
   color: #fff;
   font-size: 0.9rem;
 }
+
 
 
 

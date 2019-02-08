@@ -3,7 +3,7 @@ let token = localStorage.getItem('token');
 
 
 function getOffices() {
-  fetch('http://localhost:5003/api/v1/offices', {
+  fetch('https://hoxtygen-politico.herokuapp.com/api/v1/offices', {
     headers: {
       'api-access-token': token,
     },

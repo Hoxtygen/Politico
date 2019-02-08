@@ -1,7 +1,9 @@
 import { userInfo } from 'os';
+import validator from 'express-validator';
+/* import { check, validationResult } from 'express-validator'; */
 import dbConfig from '../database/dbConfig';
 import validations from '../helper/validateLogin';
-import Parties from '../database/partyData';
+
 
 class PartyController {
   static getAllParties(req, res) {
@@ -31,10 +33,10 @@ class PartyController {
 
   static getOneParty(req, res) {
     const id = parseInt(req.params.id, 10);
-    if (typeof id !== 'number') {
+    if (isNaN(id)) {
       return res.status(400).json({
         status: 400,
-        error: 'Invalid value type supplied',
+        error: 'Input must be a number',
       });
     }
     dbConfig.query(`SELECT * FROM politico_andela.parties WHERE id = ${id}`)
@@ -85,7 +87,7 @@ class PartyController {
         error: errors.error.details[0].message,
       });
     }
-    
+
     const {
       name,
       Acronym,
@@ -112,20 +114,20 @@ class PartyController {
   }
 
   static editParty(req, res) {
-    /* const errors = validations.validateEditParty(req.params.id, req.body.name);
+    const errors = validations.validateEditParty(req.params.id, req.body.name);
     if (errors.error) {
       return res.status(400).json({
         status: 400,
         error: errors.error.details[0].message,
       });
-    } */
-    
-    const { name } = req.body.name;
+    }
+
+    const { name } = req.body;
     const id = parseInt(req.params.id, 10);
-    //const query = 'UPDATE politico_andela.parties SET name =$1 WHERE id = $2 RETURNING *';
+    // const query = 'UPDATE politico_andela.parties SET name =$1 WHERE id = $2 RETURNING *';
     dbConfig.query('UPDATE politico_andela.parties SET name =$1 WHERE id = $2 RETURNING *', [name, id])
       .then((party) => {
-        console.log(party.rowCount)
+        console.log(party.rowCount);
         if (party.rowCount > 0) {
           return res.status(200).json({
             status: 200,

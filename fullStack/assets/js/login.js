@@ -57,7 +57,7 @@ function login(event) {
   })
     .then(res => res.json())
     .then((parsedData) => {
-      // console.log(parsedData);
+      console.log(parsedData);
       const { err, data } = parsedData;
       if (err) {
         if (err.email) {
