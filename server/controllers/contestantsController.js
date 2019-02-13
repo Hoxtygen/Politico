@@ -26,6 +26,7 @@ class ContestantsController {
         if (contest.rowCount > 0) {
           return res.status(201).json({
             status: 201,
+            message: 'Contestant added',
             data: contest.rows,
           });
         }

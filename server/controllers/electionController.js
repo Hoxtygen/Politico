@@ -25,6 +25,7 @@ class RegisterCandidate {
         if (politician.rowCount > 0) {
           return res.status(201).json({
             status: 201,
+            message: 'Candidate registered',
             data: politician.rows,
           });
         }

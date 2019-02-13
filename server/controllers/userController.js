@@ -49,13 +49,12 @@ class UserController {
             {
               token,
               user: {
-                first_Name: user.rows[0].firstname,
-                last_Name: user.rows[0].lastname,
+                first_Name: user.rows[0].first_name,
+                last_Name: user.rows[0].last_name,
                 email: user.rows[0].email,
-                other_Name: user.rows[0].othername,
-                phone_Number: user.rows[0].phonenumber,
-                passport_Url: user.rows[0].passporturl,
-                is_Admin: user.rows[0].isadmin,
+                other_Name: user.rows[0].other_name,
+                phone_Number: user.rows[0].phone_number,
+                passport_Url: user.rows[0].passport_url,
               },
             },
           ],
