@@ -18,6 +18,8 @@ class VoteController {
       .then((vote) => {
         if (vote.rowCount > 0) {
           return res.status(201).json({
+
+            
             status: 201,
             data: vote.rows,
           });

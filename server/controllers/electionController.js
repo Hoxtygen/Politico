@@ -37,7 +37,7 @@ class RegisterCandidate {
         if (err.message.includes('unique')) {
           return res.status(409).json({
             status: 409,
-            error: 'Candidate already registered for this office',
+            error: 'Candidate already registered for an office, and cannot contest for two different offices in the same election cycle',
           });
         }
       });

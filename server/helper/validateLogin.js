@@ -10,14 +10,14 @@ const validateLogin = (login) => {
 
 const validateNewUser = (newUser) => {
   const schema = Joi.object().keys({
-    firstname: Joi.string().required(),
-    lastname: Joi.string().required(),
-    othername: Joi.string().required(),
+    first_Name: Joi.string().required(),
+    last_Name: Joi.string().required(),
+    other_Name: Joi.string().required(),
     email: Joi.string().email().required(),
-    phonenumber: Joi.required(),
-    passporturl: Joi.required(),
+    phone_Number: Joi.required(),
+    passport_Url: Joi.required(),
     password: Joi.required(),
-    isadmin: Joi.boolean(),
+    is_Admin: Joi.boolean(),
   });
   return Joi.validate(newUser, schema, { abortEarly: false });
 };

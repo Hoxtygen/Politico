@@ -1,5 +1,4 @@
 import express from 'express';
-import validator from 'express-validator';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
@@ -25,7 +24,6 @@ app.get('/', (req, res) => {
   });
 });
 
-app.use(validator());
 
 /* app.use('*',  (res, req) => {
   res.json({
