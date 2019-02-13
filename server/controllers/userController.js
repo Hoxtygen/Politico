@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import encrypt from './encrypt';
 import validations from '../helper/validateLogin';
 import dbConfig from '../database/dbConfig';
@@ -39,7 +40,7 @@ class UserController {
         }
         const data = {
           email: user.rows[0].email,
-          isadmin: user.rows[0].isadmin,
+          is_Admin: user.rows[0].isadmin,
         };
         const token = encrypt.createToken(data);
         return res.status(200).json({
@@ -48,13 +49,12 @@ class UserController {
             {
               token,
               user: {
-                firstname: user.rows[0].firstname,
-                lastname: user.rows[0].lastname,
+                first_Name: user.rows[0].first_name,
+                last_Name: user.rows[0].last_name,
                 email: user.rows[0].email,
-                othername: user.rows[0].othername,
-                phonenumber: user.rows[0].phonenumber,
-                passporturl: user.rows[0].passporturl,
-                isadmin: user.rows[0].isadmin,
+                other_Name: user.rows[0].other_name,
+                phone_Number: user.rows[0].phone_number,
+                passport_Url: user.rows[0].passport_url,
               },
             },
           ],
@@ -71,7 +71,7 @@ class UserController {
 
   static addNewUser(req, res) {
     let {
-      firstname, lastname, othername, email, phonenumber, passporturl, password,
+      first_Name, last_Name, other_Name, email, phone_Number, passport_Url, password,
     } = req.body;
     const errors = validations.validateNewUser(req.body);
     if (errors.error) {
@@ -82,15 +82,15 @@ class UserController {
     }
     password = encrypt.encryptPwd(password);
     const newUser = {
-      firstname,
-      lastname,
-      othername,
+      first_Name,
+      last_Name,
+      other_Name,
       email,
-      phonenumber,
-      passporturl,
+      phone_Number,
+      passport_Url,
       password,
     };
-    dbConfig.query('INSERT INTO politico_andela.users (firstname, lastname, othername, email, phonenumber, passporturl, password) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *', [firstname, lastname, othername, email, phonenumber, passporturl, password])
+    dbConfig.query('INSERT INTO politico_andela.users (first_Name, last_Name, other_Name, email, phone_Number, passport_Url, password) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *', [first_Name, last_Name, other_Name, email, phone_Number, passport_Url, password])
       .then((user) => {
         if (user.rowCount > 0) {
           const data = {
@@ -105,12 +105,12 @@ class UserController {
               {
                 token,
                 user: {
-                  firstname: user.rows[0].firstname,
-                  lastname: user.rows[0].lastname,
+                  first_Name: user.rows[0].first_name,
+                  last_Name: user.rows[0].last_name,
                   email: user.rows[0].email,
-                  othername: user.rows[0].othername,
-                  phonenumber: user.rows[0].phonenumber,
-                  passporturl: user.rows[0].passporturl,
+                  other_Name: user.rows[0].other_name,
+                  phone_Number: user.rows[0].phone_number,
+                  passport_Url: user.rows[0].passport_url,
                 },
               },
             ],
@@ -124,6 +124,7 @@ class UserController {
       })
       .catch((err) => {
         if (err.message.includes('unique')) {
+          console.log(err.message);
           res.status(500).json({
             status: 500,
             error: 'User with that email already exist',

@@ -3,22 +3,29 @@ import validations from '../helper/validateLogin';
 
 class RegisterCandidate {
   static register(req, res) {
-    const candidate = req.params.id;
+    const candidate = parseInt(req.params.id, 10);
     const { office, party } = req.body;
     const params = { candidate, office };
     console.log(req.body)
-    const errors = validations.validateCandidateRegistration(params);
+    //const errors = validations.validateCandidateRegistration(params);
    /*  if (errors.error) {
       return res.status(400).json({
         status: 400,
         error: errors.error.details[0].message,
       });
     } */
+    if (isNaN(office) || isNaN(party || isNaN(candidate))) {
+      return res.status(400).json({
+        status: 400,
+        error: 'You entered a non-numeric character in your request',
+      })
+    }
     dbConfig.query('INSERT INTO politico_andela.candidates (office, party, candidate) VALUES ($1, $2, $3) RETURNING *', [office, party, candidate])
       .then((politician) => {
         if (politician.rowCount > 0) {
           return res.status(201).json({
             status: 201,
+            message: 'Candidate registered',
             data: politician.rows,
           });
         }
@@ -31,7 +38,7 @@ class RegisterCandidate {
         if (err.message.includes('unique')) {
           return res.status(409).json({
             status: 409,
-            error: 'Candidate already registered for this office',
+            error: 'Candidate already registered for an office, and cannot contest for two different offices in the same election cycle',
           });
         }
       });
