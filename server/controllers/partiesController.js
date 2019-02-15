@@ -52,8 +52,8 @@ class PartyController {
           error: 'The party you are looking for does not exist',
         });
       })
-      .catch(err => res.status(400).json({
-        status: 400,
+      .catch(err => res.status(500).json({
+        status: 500,
         error: err.message,
       }));
   }
@@ -73,8 +73,8 @@ class PartyController {
           error: 'Party not found',
         });
       })
-      .catch(err => res.status(404).json({
-        status: 'error',
+      .catch(err => res.status(500).json({
+        status: 500,
         data: err.message,
       }));
   }
@@ -107,8 +107,8 @@ class PartyController {
           error: 'Party could not be added',
         });
       })
-      .catch(err => res.status(400).json({
-        status: 400,
+      .catch(err => res.status(500).json({
+        status: 500,
         error: err.message,
       }));
   }
@@ -125,9 +125,10 @@ class PartyController {
     const { name } = req.body;
     const id = parseInt(req.params.id, 10);
     // const query = 'UPDATE politico_andela.parties SET name =$1 WHERE id = $2 RETURNING *';
+    
+
     dbConfig.query('UPDATE politico_andela.parties SET name =$1 WHERE id = $2 RETURNING *', [name, id])
       .then((party) => {
-        console.log(party.rowCount);
         if (party.rowCount > 0) {
           return res.status(200).json({
             status: 200,
@@ -137,12 +138,12 @@ class PartyController {
         }
         return res.status(400).json({
           status: 400,
-          error: 'Party cannot be updated',
+          error: 'No party with such Id ',
         });
       })
       .catch((err) => {
-        res.status(404).json({
-          status: 404,
+        res.status(500).json({
+          status: 500,
           error: err.message,
         });
       });

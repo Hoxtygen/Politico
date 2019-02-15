@@ -43,6 +43,12 @@ const verify = {
     } */
     jwt.verify(token, process.env.SECRET_KEY, (error, decoded) => {
       req.decoded = decoded;
+      if (decoded === undefined) {
+        return res.status(400).json({
+          status: 401,
+          error: 'Log in to perform this operation',
+        });
+      }
       if (decoded.payload.isadmin === false) {
         return res.status(403).json({
           status: 403,
