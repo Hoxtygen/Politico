@@ -1,6 +1,6 @@
 import dbConfig from '../database/dbConfig';
 import validations from '../helper/validateLogin';
-import politicalOffice from '../database/officeData';
+
 
 class OfficesController {
   static getAllOffices(req, res) {
@@ -55,6 +55,7 @@ class OfficesController {
       }));
   }
 
+
   static addNewOffice(req, res) {
     const errors = validations.validateNewOffice(req.body);
     if (errors.error) {
@@ -67,22 +68,18 @@ class OfficesController {
     dbConfig.query('INSERT INTO politico_andela.offices (name, type) VALUES ($1, $2) RETURNING *', [name, type])
       .then((office) => {
         if (office.rowCount > 0) {
-          res.status(201).json({
+          return res.status(201).json({
             status: 201,
+            message: 'Office created',
             data: office.rows,
-          });
-        } else {
-          return res.status(400).json({
-            status: 400,
-            error: 'Office could not be added',
           });
         }
       })
       .catch((err) => {
         if (err.message.includes('unique')) {
-          res.status(400).json({
-            status: 400,
-            error: 'Office already exist',
+          res.status(409).json({
+            status: 409,
+            error: 'Office already registered',
           });
         }
       });

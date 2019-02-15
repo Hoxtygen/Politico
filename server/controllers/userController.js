@@ -125,8 +125,8 @@ class UserController {
       .catch((err) => {
         if (err.message.includes('unique')) {
           console.log(err.message);
-          res.status(500).json({
-            status: 500,
+          res.status(409).json({
+            status: 409,
             error: 'User with that email already exist',
           });
         }

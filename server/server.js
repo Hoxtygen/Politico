@@ -19,7 +19,8 @@ app.use(cors());
 app.use('/api/v1', router);
 
 app.get('/', (req, res) => {
-  res.json({
+  res.status(200).json({
+    status: 200,
     message: 'Welcome to Politico, the most secured electronic voting system',
   });
 });

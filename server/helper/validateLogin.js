@@ -27,11 +27,7 @@ const validateNewOffice = (newOffice) => {
     name: Joi.string().required(),
     type: Joi.string().required(),
   };
-  const failAction = (request, h, err) => {
-    throw err;
-    return;
-}
-  return Joi.validate(newOffice, schema, failAction);
+  return Joi.validate(newOffice, schema);
 };
 
 const validateGetOneOffice = (oneOffice) => {

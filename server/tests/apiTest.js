@@ -10,15 +10,25 @@ chai.should();
 let token;
 let adminToken;
 const newUser = {
-  firstname: 'Oriyomi',
-  lastname: 'jonatan',
-  othername: 'Wasiu',
+  first_Name: 'Oriyomi',
+  last_Name: 'jonatan',
+  other_Name: 'Wasiu',
   email: 'jonoris@gmail.com',
-  phonenumber: '08156110987',
-  passporturl: 'https://www.orisjonapassport.com',
+  phone_Number: '08156110987',
+  passport_Url: 'https://www.orisjonapassport.com',
   password: 'shaolindragon',
 };
 
+describe('Home Page', () => {
+  it('should return welcome message', (done) => {
+    chai.request(app)
+      .get('/')
+      .end((err, res) => {
+        res.should.have.status(200);
+        done();
+      });
+  });
+});
 
 describe('Users', () => {
   it('should register a new user', (done) => {
@@ -50,7 +60,7 @@ describe('Users', () => {
 
   it('should login an Admin', (done) => {
     const userAdmin = {
-      email: 'hoxtygen@live.com',
+      email: 'udub-it@hotmail.com',
       password: 'clusters1988',
     };
     chai.request(app)
@@ -65,11 +75,21 @@ describe('Users', () => {
   });
 });
 
-describe('Create a political office', () => {
+describe('Political Office', () => {
+  it('Should return an empty database', (done) => {
+    chai.request(app)
+      .get('/api/v1/offices/')
+      .set('api-access-token', adminToken)
+      .end((err, res) => {
+        res.should.have.status(204);
+        done();
+      });
+  });
+
   it('should create a political office', (done) => {
     const newOffice = {
-      name: 'Alaga Council',
-      type: 'Local',
+      name: 'Party Chairman',
+      type: 'State',
     };
     chai.request(app)
       .post('/api/v1/offices')
@@ -78,21 +98,69 @@ describe('Create a political office', () => {
       .end((err, res) => {
         res.should.have.status(201);
         res.body.should.be.a('object');
-        /*  res.body.data.should.have.a.property('id');
-        res.body.should.have.a.property('name');
-        res.body.data.should.have.a.property('type'); */
         done();
       });
   });
 
+  it('should not create a political office', (done) => {
+    const newOffice = {
+      type: 'State',
+    };
+    chai.request(app)
+      .post('/api/v1/offices')
+      .set('api-access-token', adminToken)
+      .send(newOffice)
+      .end((err, res) => {
+        res.should.have.status(400);
+        done();
+      });
+  });
+
+  it('should not create a political office', (done) => {
+    const newOffice = {
+      name: 'Senior Prefect',
+    };
+    chai.request(app)
+      .post('/api/v1/offices')
+      .set('api-access-token', adminToken)
+      .send(newOffice)
+      .end((err, res) => {
+        res.should.have.status(400);
+        done();
+      });
+  });
+
+  
   it('should get a single political office', (done) => {
-    const id = 3;
+    const id = 1;
     chai.request(app)
       .get(`/api/v1/offices/${id}`)
       .set('api-access-token', adminToken)
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
+        done();
+      });
+  });
+
+  it('should not get a single political office', (done) => {
+    const id = 300;
+    chai.request(app)
+      .get(`/api/v1/offices/${id}`)
+      .set('api-access-token', adminToken)
+      .end((err, res) => {
+        res.should.have.status(404);
+        done();
+      });
+  });
+
+  it('should not get a single political office', (done) => {
+    const id = 'cat';
+    chai.request(app)
+      .get(`/api/v1/offices/${id}`)
+      .set('api-access-token', adminToken)
+      .end((err, res) => {
+        res.should.have.status(400);
         done();
       });
   });
@@ -108,6 +176,7 @@ describe('Create a political office', () => {
       });
   });
 });
+
 
 //  Parties
 
@@ -142,6 +211,17 @@ describe('Political Party', () => {
       .set('api-access-token', token)
       .end((err, res) => {
         res.should.have.status(404);
+        done();
+      });
+  });
+
+  it('should not get a political party', (done) => {
+    const id = 'cat';
+    chai.request(app)
+      .get(`/api/v1/parties/${id}`)
+      .set('api-access-token', token)
+      .end((err, res) => {
+        res.should.have.status(400);
         done();
       });
   });
@@ -189,11 +269,10 @@ describe('Political Party', () => {
 });
 
 describe('Candidate Registration', () => {
-  // const office = { office: 2 };
   it('should register a candidate', (done) => {
     chai.request(app)
       .post('/api/v1/office/1/register')
-      .send({ office: 2 })
+      .send({ office: 1 })
       .set('api-access-token', adminToken)
       .end((err, res) => {
         res.should.have.status(201);
@@ -202,4 +281,3 @@ describe('Candidate Registration', () => {
       });
   });
 });
-
