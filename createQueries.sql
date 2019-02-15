@@ -1,4 +1,4 @@
-\c politico hoxtygen;
+\c politico;
 
 INSERT INTO politico_andela.offices (name, type) VALUES ('Governor', 'State');
 INSERT INTO politico_andela.offices (name, type) VALUES ('President', 'Federal');
