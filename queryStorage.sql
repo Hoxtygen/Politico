@@ -246,23 +246,23 @@ CREATE TABLE IF NOT EXISTS politico_andela.Users (
     other_Name VARCHAR(100) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL ,
     phone_Number VARCHAR(20) NOT NULL,
-    passport_Url VARCHAR(200) UNIQUE NOT NULL,
+    passport_Url VARCHAR(200) NOT NULL,
     is_Admin BOOLEAN DEFAULT FALSE NOT NULL,
     password VARCHAR (900) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS politico_andela.offices (
      id SERIAL PRIMARY KEY NOT NULL,
-    name VARCHAR(100) NOT NULL,
+    name VARCHAR(100) UNIQUE NOT NULL,
     type VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS politico_andela.parties(
     id SERIAL PRIMARY KEY NOT NULL,
     name VARCHAR(200) UNIQUE NOT NULL,
-    acronym VARCHAR(100) UNIQUE,
+    acronym VARCHAR(100) NOT NULL,
     hqaddress TEXT NOT NULL,
-    logoUrl VARCHAR(200) UNIQUE NOT NULL
+    logoUrl VARCHAR(200) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS politico_andela.contestants (

@@ -124,9 +124,6 @@ class PartyController {
 
     const { name } = req.body;
     const id = parseInt(req.params.id, 10);
-    // const query = 'UPDATE politico_andela.parties SET name =$1 WHERE id = $2 RETURNING *';
-    
-
     dbConfig.query('UPDATE politico_andela.parties SET name =$1 WHERE id = $2 RETURNING *', [name, id])
       .then((party) => {
         if (party.rowCount > 0) {

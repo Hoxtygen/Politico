@@ -5,40 +5,58 @@ class RegisterCandidate {
   static register(req, res) {
     const candidate = parseInt(req.params.id, 10);
     const { office, party } = req.body;
-    const params = { candidate, office };
-    console.log(req.body)
-    //const errors = validations.validateCandidateRegistration(params);
-   /*  if (errors.error) {
+    const contestant = candidate;
+    //  const params = { candidate };
+    console.log(req.body);
+    //  const errors = validations.validateCandidateRegistration(params);
+    /*  if (errors.error) {
       return res.status(400).json({
         status: 400,
         error: errors.error.details[0].message,
       });
     } */
+    const candQuery = 'SELECT * FROM politico_andela.contestants WHERE contestant = $1';
+    const value = [contestant];
     if (isNaN(office) || isNaN(party || isNaN(candidate))) {
       return res.status(400).json({
         status: 400,
         error: 'You entered a non-numeric character in your request',
-      })
+      });
     }
-    dbConfig.query('INSERT INTO politico_andela.candidates (office, party, candidate) VALUES ($1, $2, $3) RETURNING *', [office, party, candidate])
-      .then((politician) => {
-        if (politician.rowCount > 0) {
-          return res.status(201).json({
-            status: 201,
-            message: 'Candidate registered',
-            data: politician.rows,
+    //  dbConfig.query('INSERT INTO politico_andela.candidates (office, party, candidate) VALUES ($1, $2, $3) RETURNING *', [office, party, candidate])
+    dbConfig.query(candQuery, value)
+      .then((result) => {
+        if (result.rowCount > 0) {
+          dbConfig.query('INSERT INTO politico_andela.candidates (office, party, candidate) VALUES ($1, $2, $3) RETURNING *', [office, party, candidate])
+            .then((newCandidate) => {
+              if (newCandidate.rowCount > 0) {
+                return res.status(201).json({
+                  status: 201,
+                  message: 'Candidate registered',
+                  data: newCandidate.rows,
+                });
+              }
+            })
+            .catch((err) => {
+              if (err.message.includes('unique')) {
+                res.status(409).json({
+                  status: 409,
+                  error: 'Candidate already registered for an office',
+                });
+              }
+            });
+        } else {
+          return res.status(404).json({
+            status: 404,
+            error: 'User is not a contestant for any office',
           });
         }
-        return res.status(400).json({
-          status: 400,
-          error: 'Candidate could not be registered',
-        });
       })
       .catch((err) => {
-        if (err.message.includes('unique')) {
-          return res.status(409).json({
-            status: 409,
-            error: 'Candidate already registered for an office, and cannot contest for two different offices in the same election cycle',
+        if (err) {
+          return res.status(500).json({
+            status: 500,
+            error: err.message,
           });
         }
       });
