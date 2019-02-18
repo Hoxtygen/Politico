@@ -14,8 +14,9 @@ const validateNewUser = (newUser) => {
     last_Name: Joi.string().required(),
     other_Name: Joi.string().required(),
     email: Joi.string().email().required(),
+    party: Joi.number().integer(),
     phone_Number: Joi.required(),
-    passport_Url: Joi.required(),
+    passport_Url: Joi.string(),
     password: Joi.required(),
     is_Admin: Joi.boolean(),
   });

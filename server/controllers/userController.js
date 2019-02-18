@@ -86,11 +86,12 @@ class UserController {
       last_Name,
       other_Name,
       email,
+      party,
       phone_Number,
       passport_Url,
       password,
     };
-    dbConfig.query('INSERT INTO politico_andela.users (first_Name, last_Name, other_Name, email, phone_Number, passport_Url, password) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *', [first_Name, last_Name, other_Name, email, phone_Number, passport_Url, password])
+    dbConfig.query('INSERT INTO politico_andela.users (first_Name, last_Name, other_Name, email, party, phone_Number, passport_Url, password) VALUES ($1, $2, $3, $4, $5, $5, $6, $7) RETURNING *', [first_Name, last_Name, other_Name, email, phone_Number, passport_Url, password])
       .then((user) => {
         if (user.rowCount > 0) {
           const data = {
