@@ -4,10 +4,9 @@ import validations from '../helper/validateLogin';
 class RegisterCandidate {
   static register(req, res) {
     const candidate = parseInt(req.params.id, 10);
-    const { office } = req.body;
+    const { office, party } = req.body;
     const contestant = candidate;
     //  const params = { candidate };
-    console.log(req.body);
     //  const errors = validations.validateCandidateRegistration(params);
     /*  if (errors.error) {
       return res.status(400).json({
@@ -17,7 +16,7 @@ class RegisterCandidate {
     } */
     const candQuery = 'SELECT * FROM politico_andela.contestants WHERE contestant = $1';
     const value = [contestant];
-    if (isNaN(office) || isNaN(candidate)) {
+    if (isNaN(office) || isNaN(party) || isNaN(candidate)) {
       return res.status(400).json({
         status: 400,
         error: 'You entered a non-numeric character in your request',
@@ -27,7 +26,7 @@ class RegisterCandidate {
     dbConfig.query(candQuery, value)
       .then((result) => {
         if (result.rowCount > 0) {
-          dbConfig.query('INSERT INTO politico_andela.candidates (office, candidate) VALUES ($1, $2) RETURNING *', [office, candidate])
+          dbConfig.query('INSERT INTO politico_andela.candidates (office, party, candidate) VALUES ($1, $2, $3) RETURNING *', [office, party, candidate])
             .then((newCandidate) => {
               if (newCandidate.rowCount > 0) {
                 return res.status(201).json({

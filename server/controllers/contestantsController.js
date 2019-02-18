@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-import { constants } from 'zlib';
 import dbConfig from '../database/dbConfig';
 import validations from '../helper/validateLogin';
 
@@ -23,9 +22,9 @@ class ContestantsController {
   }
 
   static addContestant(req, res) {
-    const { office } = req.body;
+    const { office, party } = req.body;
     const contestant = parseInt(req.params.id, 10);
-    if (isNaN(office) || isNaN(contestant)) {
+    if (isNaN(office) || isNaN(party) || isNaN(contestant)) {
       return res.status(400).json({
         status: 400,
         error: 'Invalid input',
@@ -75,7 +74,7 @@ class ContestantsController {
     };
 
     // eslint-disable-next-line func-names
-   /*  const trueParty = function () {
+    const trueParty = function () {
       const partyQuery = 'SELECT * FROM politico_andela.parties WHERE id = $1';
       const value = [party];
       dbConfig.query(partyQuery, value)
@@ -93,7 +92,7 @@ class ContestantsController {
             error: err.message,
           });
         });
-    }; */
+    };
 
     //  Single Office
 
@@ -118,18 +117,31 @@ class ContestantsController {
         });
     }; */
 
-
     // eslint-disable-next-line func-names
-    const regContestant = function () {
-      const constQuery = 'INSERT INTO politico_andela.contestants (contestant, office) VALUES ($1, $2) RETURNING *';
-      const values = [contestant, office];
-      dbConfig.query(constQuery, values)
-        .then((contest) => {
-          if (contest.rowCount > 0) {
-            return res.status(201).json({
-              status: 201,
-              message: 'Contestant added',
-              data: contest.rows,
+    const checkUserDupes = function () {
+      const userDupesQuery = 'SELECT * FROM politico_andela.contestants WHERE contestant =$1';
+      const value = [contestant];
+      dbConfig.query(userDupesQuery, value)
+        .then((result) => {
+          if (result.rowCount > 0) {
+            res.status(409).json({
+              status: 409,
+              error: 'You cannot contest for two different offices in the same election cycle',
+            });
+          }
+        });
+    };
+//  drop unique constraint from contestant column, will have to drop alltables and reconstruct.
+    // eslint-disable-next-line func-names
+    const checkDupes = function () {
+      const dupeQuery = 'SELECT * FROM politico_andela.contestants WHERE office = $1 AND contestant =$2';
+      const values = [office, contestant];
+      dbConfig.query(dupeQuery, values)
+        .then((result) => {
+          if (result.rowCount > 0) {
+            res.status(409).json({
+              status: 409,
+              error: 'You already showed interest in this office',
             });
           }
         })
@@ -139,6 +151,23 @@ class ContestantsController {
               status: 409,
               error: 'You already showed interest in an office',
             });
+          } 
+        });
+    };
+
+
+    // eslint-disable-next-line func-names
+    const regContestant = function () {
+      const constQuery = 'INSERT INTO politico_andela.contestants (contestant, party, office) VALUES ($1, $2, $3) RETURNING *';
+      const values = [contestant, party, office];
+      dbConfig.query(constQuery, values)
+        .then((contest) => {
+          if (contest.rowCount > 0) {
+            return res.status(201).json({
+              status: 201,
+              message: 'Contestant added',
+              data: contest.rows,
+            });
           }
         });
     };
@@ -146,6 +175,9 @@ class ContestantsController {
     Promise.all([
       trueContestant(),
       trueOffice(),
+      trueParty(),
+     /*  checkUserDupes(), */
+      checkDupes(),
     ])
       .then(() => {
         regContestant();
