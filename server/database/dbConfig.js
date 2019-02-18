@@ -6,6 +6,7 @@ dotenv.config();
 const { DATABASE_URL, DATABASE_URL_TEST, NODE_ENV } = process.env;
 
 const connectionString = NODE_ENV === 'test' ? DATABASE_URL_TEST : DATABASE_URL;
+console.log(connectionString);
 
 const pool = new Pool({
   connectionString,

@@ -1,3 +1,5 @@
+
+
 CREATE TABLE IF NOT EXISTS politico_andela.Users (
     id SERIAL PRIMARY KEY NOT NULL,
     firstName VARCHAR(100) NOT NULL,
