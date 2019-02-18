@@ -6,7 +6,7 @@ const contestantsRouter = Router();
 
 contestantsRouter.get('/', ContestantsController.getAllContestants);
 contestantsRouter.get('/:office/contestants', ContestantsController.getSingleOfficeContestants);
-contestantsRouter.post('/', ContestantsController.addContestant);
+contestantsRouter.post('/:id/add', verify.verifyLoggedIn, ContestantsController.addContestant);
 
 
 export default contestantsRouter;
