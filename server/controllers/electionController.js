@@ -19,7 +19,7 @@ class RegisterCandidate {
     if (isNaN(office) || isNaN(party) || isNaN(candidate)) {
       return res.status(400).json({
         status: 400,
-        error: 'You entered a non-numeric character in your request',
+        error: 'Invalid input',
       });
     }
     //  dbConfig.query('INSERT INTO politico_andela.candidates (office, party, candidate) VALUES ($1, $2, $3) RETURNING *', [office, party, candidate])

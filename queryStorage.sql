@@ -271,6 +271,7 @@ CREATE TABLE IF NOT EXISTS politico_andela.parties(
 CREATE TABLE IF NOT EXISTS politico_andela.contestants (
     id SERIAL UNIQUE NOT NULL,
     office INTEGER REFERENCES politico_andela.offices(id) ON DELETE CASCADE,
+    party INTEGER REFERENCES politico_andela.parties(id) ON DELETE CASCADE,
     contestant INTEGER UNIQUE REFERENCES politico_andela.users(id) ON DELETE CASCADE,
     PRIMARY KEY (office, contestant)
 );
@@ -279,6 +280,7 @@ CREATE TABLE IF NOT EXISTS politico_andela.contestants (
 CREATE TABLE IF NOT EXISTS politico_andela.candidates (
     id SERIAL UNIQUE NOT NULL,
     office INTEGER REFERENCES politico_andela.offices(id) ON DELETE CASCADE,
+    party INTEGER REFERENCES politico_andela.parties(id) ON DELETE CASCADE,
     candidate INTEGER UNIQUE REFERENCES politico_andela.users(id) ON DELETE CASCADE,
     PRIMARY KEY (office, candidate)
 );
