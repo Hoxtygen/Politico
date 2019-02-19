@@ -130,7 +130,7 @@ describe('Political Office', () => {
       });
   });
 
-  
+
   it('should get a single political office', (done) => {
     const id = 1;
     chai.request(app)
@@ -268,11 +268,94 @@ describe('Political Party', () => {
   });
 });
 
+describe('Contestants', () => {
+  it('should return an empty contestant database', (done) => {
+    chai.request(app)
+      .get('/api/v1/contestants/')
+    // .set('api-access-token', adminToken)
+      .end((err, res) => {
+        res.should.have.status(204);
+        done();
+      });
+  });
+
+  it('Should add a new contestant', (done) => {
+    chai.request(app)
+      .post('/api/v1/contestants/1/add')
+      .send({
+        office: 1,
+        party: 1,
+      })
+      .set('api-access-token', token)
+      .end((err, res) => {
+        res.should.have.status(201);
+        res.body.should.be.a('object');
+        done();
+      });
+  });
+
+  it('Should not add a new contestant', (done) => {
+    chai.request(app)
+      .post('/api/v1/contestants/3000/add')
+      .send({
+        office: 1,
+        party: 1,
+      })
+      .set('api-access-token', token)
+      .end((err, res) => {
+        res.should.have.status(404);
+        done();
+      });
+  });
+
+  it('Should not add a new contestant', (done) => {
+    chai.request(app)
+      .post('/api/v1/contestants/3/add')
+      .send({
+        office: 1000,
+        party: 1,
+      })
+      .set('api-access-token', token)
+      .end((err, res) => {
+        res.should.have.status(404);
+        done();
+      });
+  });
+
+  it('Should not add a new contestant', (done) => {
+    chai.request(app)
+      .post('/api/v1/contestants/3/add')
+      .send({
+        office: 1,
+        party: 1000,
+      })
+      .set('api-access-token', token)
+      .end((err, res) => {
+        res.should.have.status(404);
+        done();
+      });
+  });
+
+  it('should return all contestants', (done) => {
+    chai.request(app)
+      .get('/api/v1/contestants/')
+    // .set('api-access-token', adminToken)
+      .end((err, res) => {
+        res.should.have.status(200);
+        done();
+      });
+  });
+});
+
+
 describe('Candidate Registration', () => {
   it('should register a candidate', (done) => {
     chai.request(app)
       .post('/api/v1/office/1/register')
-      .send({ office: 1 })
+      .send({
+        office: 1,
+        party: 1,
+      })
       .set('api-access-token', adminToken)
       .end((err, res) => {
         res.should.have.status(201);
