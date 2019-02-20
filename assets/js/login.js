@@ -74,7 +74,7 @@ function login(event) {
         if (user.isadmin === true) {
           window.location = 'dashboard.html';
           return;
-        } if (user.isadmin === false) {
+        } else if (user.isadmin === false) {
           window.location = 'Udashboard.html';
           return;
         }
