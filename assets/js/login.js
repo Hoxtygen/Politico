@@ -71,15 +71,15 @@ function login(event) {
         const { token, user } = data[0];
         console.log(user.isadmin)
         localStorage.setItem('token', token);
-        if (user.isadmin === true) {
+        if (user.is_admin === true) {
           window.location = 'dashboard.html';
           return;
-        } if (user.isadmin === false) {
+        } if (user.is_admin === false) {
           window.location = 'Udashboard.html';
           return;
-        }/* else {
+        }else 
           window.location = 'index.html';
-        } */
+        
 
       }
     })
