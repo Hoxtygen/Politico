@@ -56,7 +56,7 @@ function login(event) {
     .then(res => res.json())
     .then((parsedData) => {
       console.log(parsedData);
-      const { err, data } = parsedData;
+     /*  const { err, data } = parsedData;
       if (err) {
         if (err.email) {
           console.log(err.email);
@@ -79,7 +79,7 @@ function login(event) {
           window.location = 'index.html';
         
 
-      }
+      } */
     })
     .catch((err) => {
       if (err) {
