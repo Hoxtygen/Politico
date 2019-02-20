@@ -77,8 +77,9 @@ function login(event) {
         } else if (user.isadmin === false) {
           window.location = 'Udashboard.html';
           return;
+        }else {
+          window.location = 'index.html';
         }
-        window.location = 'index.html';
 
       }
     })
