@@ -56,7 +56,7 @@ function login(event) {
     .then(res => res.json())
     .then((parsedData) => {
       console.log(parsedData);
-     /*  const { err, data } = parsedData;
+      const { err, data } = parsedData;
       if (err) {
         if (err.email) {
           console.log(err.email);
@@ -67,8 +67,8 @@ function login(event) {
       } else {
         console.log(data);
         const { token, user } = data[0];
-        console.log(user.is_admin)
-        localStorage.setItem('token', token);
+        console.log(user.is_admin);
+        /* localStorage.setItem('token', token);
         if (user.is_admin === true) {
           window.location = 'dashboard.html';
           return;
@@ -76,10 +76,10 @@ function login(event) {
           window.location = 'Udashboard.html';
           return;
         }else 
-          window.location = 'index.html';
+          window.location = 'index.html'; */
         
 
-      } */
+      }
     })
     .catch((err) => {
       if (err) {
