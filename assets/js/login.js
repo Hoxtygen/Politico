@@ -67,12 +67,12 @@ function login(event) {
       } else {
         console.log(data);
         const { token, user } = data[0];
-        console.log(user.is_Admin)
+        console.log(user.is_admin)
         localStorage.setItem('token', token);
-        if (user.is_Admin === true) {
+        if (user.is_admin === true) {
           window.location = 'dashboard.html';
           return;
-        } if (user.is_Admin === false) {
+        } else if (user.is_admin === false) {
           window.location = 'Udashboard.html';
           return;
         }else 
