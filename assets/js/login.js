@@ -42,8 +42,6 @@ function login(event) {
 
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
-  console.log(email);
-  console.log(password);
 
   fetch('https://hoxtygen-politico.herokuapp.com/api/v1/auth/login', {
     method: 'POST',
@@ -69,12 +67,12 @@ function login(event) {
       } else {
         console.log(data);
         const { token, user } = data[0];
-        console.log(user.isadmin)
+        console.log(user.is_Admin)
         localStorage.setItem('token', token);
-        if (user.is_admin === true) {
+        if (user.is_Admin === true) {
           window.location = 'dashboard.html';
           return;
-        } if (user.is_admin === false) {
+        } if (user.is_Admin === false) {
           window.location = 'Udashboard.html';
           return;
         }else 
