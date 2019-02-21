@@ -39,8 +39,8 @@ class UserController {
           });
         }
         const data = {
-          email: user.rows[0].email,
-          is_Admin: user.rows[0].isadmin,
+          id: user.rows[0].id,
+          isAdmin: user.rows[0].is_admin,
         };
         const token = encrypt.createToken(data);
         return res.status(200).json({
@@ -49,6 +49,7 @@ class UserController {
             {
               token,
               user: {
+                id: user.rows[0].id,
                 first_Name: user.rows[0].first_name,
                 last_Name: user.rows[0].last_name,
                 email: user.rows[0].email,
@@ -95,7 +96,7 @@ class UserController {
         if (user.rowCount > 0) {
           const data = {
             email: user.rows[0].email,
-            isadmin: user.rows[0].isadmin,
+            isadmin: user.rows[0].is_admin,
           };
 
           const token = encrypt.createToken(data);
@@ -105,6 +106,7 @@ class UserController {
               {
                 token,
                 user: {
+                  id: user.rows[0].id,
                   first_Name: user.rows[0].first_name,
                   last_Name: user.rows[0].last_name,
                   email: user.rows[0].email,
