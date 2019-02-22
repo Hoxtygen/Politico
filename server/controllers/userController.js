@@ -40,7 +40,7 @@ class UserController {
         }
         const data = {
           id: user.rows[0].id,
-          isAdmin: user.rows[0].is_admin,
+          is_admin: user.rows[0].is_admin,
         };
         const token = encrypt.createToken(data);
         return res.status(200).json({
@@ -95,8 +95,8 @@ class UserController {
       .then((user) => {
         if (user.rowCount > 0) {
           const data = {
-            email: user.rows[0].email,
-            isadmin: user.rows[0].is_admin,
+            id: user.rows[0].id,
+            is_admin: user.rows[0].is_admin,
           };
 
           const token = encrypt.createToken(data);

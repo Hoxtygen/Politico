@@ -35,12 +35,7 @@ const verify = {
         message: 'Access denied, you must be logged in to access this resource',
       });
     }
-    /* if (!req.decoded) {
-      res.status(400).json({
-        status: 400,
-        error: 'Internal server error',
-      });
-    } */
+   
     jwt.verify(token, process.env.SECRET_KEY, (error, decoded) => {
       req.decoded = decoded;
       if (decoded === undefined) {
