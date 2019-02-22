@@ -43,6 +43,7 @@ class UserController {
           is_admin: user.rows[0].is_admin,
         };
         const token = encrypt.createToken(data);
+        console.log(user.rows);
         return res.status(200).json({
           status: 200,
           data: [
@@ -56,6 +57,7 @@ class UserController {
                 other_Name: user.rows[0].other_name,
                 phone_Number: user.rows[0].phone_number,
                 passport_Url: user.rows[0].passport_url,
+                is_admin: user.rows[0].is_admin,
               },
             },
           ],
