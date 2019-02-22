@@ -68,7 +68,7 @@ function login(event) {
         console.log(data);
         const { token, user } = data[0];
         console.log(user.is_admin);
-        /* localStorage.setItem('token', token);
+        localStorage.setItem('token', token);
         if (user.is_admin === true) {
           window.location = 'dashboard.html';
           return;
@@ -76,7 +76,7 @@ function login(event) {
           window.location = 'Udashboard.html';
           return;
         }else 
-          window.location = 'index.html'; */
+          window.location = 'index.html';
         
 
       }
